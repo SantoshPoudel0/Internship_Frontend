@@ -1,0 +1,145 @@
+.navbar {
+  background: transparent;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 5%;
+  position: relative;
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.navbar-logo {
+  position: absolute;
+  left: 721px;
+  top: 40px;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.navbar-logo img {
+  width: 71px;
+  height: 83px;
+}
+
+.logo-text {
+  font-size: 14px;
+  color: #6A3D2A;
+  margin-top: 5px;
+  font-family: 'Dancing Script', cursive;
+}
+
+.nav-link {
+  color: #6A3D2A;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #997950;
+}
+
+.nav-link[href="/trainings"] {
+  position: absolute;
+  width: 83px;
+  height: 24px;
+  top: 61px;
+  left: 863px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #FFFDF8;
+}
+
+.nav-link[href="/contact"] {
+  position: absolute;
+  width: 66px;
+  height: 24px;
+  top: 60px;
+  left: 986px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #FFFDF8;
+}
+
+.search-icon {
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  top: 61px;
+  left: 1092px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 1440px) {
+  .navbar-logo {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .nav-link[href="/trainings"],
+  .nav-link[href="/contact"],
+  .search-icon {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .navbar {
+    height: auto;
+    position: relative;
+    padding: 1rem 0;
+    background-color: #fff;
+  }
+  
+  .nav-left, .nav-right {
+    flex-direction: column;
+    gap: 15px;
+    margin: 10px 0;
+  }
+  
+  .navbar-logo {
+    position: static;
+    transform: none;
+    margin: 1rem 0;
+  }
+} 

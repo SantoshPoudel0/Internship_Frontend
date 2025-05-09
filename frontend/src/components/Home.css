@@ -1,0 +1,180 @@
+.home {
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background-color: #FFFCF7;
+}
+
+.landing-section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  position: relative;
+}
+
+.landing-content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.left-content {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10%;
+}
+
+.left-content h1 {
+  font-size: 48px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 1.5rem;
+  color: #6A3D2A;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-transform: capitalize;
+}
+
+.left-content p {
+  font-size: 18px;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 2rem;
+  color: #747474;
+  line-height: 32px;
+  letter-spacing: 0%;
+  max-width: 533px;
+}
+
+.cta-buttons {
+  margin-bottom: 2rem;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 8px 24px;
+  width: 143px;
+  height: 48px;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: #6A3D2A;
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.btn-primary:hover {
+  background-color: #8B5A3B;
+}
+
+.social-icons-container {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.social-icon {
+  color: #000000;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #6A3D2A;
+}
+
+.right-content {
+  position: absolute;
+  width: 618px;
+  height: 696px;
+  left: 822px;
+  display: flex;
+  flex-direction: column;
+  background-color: #EBEDD1;
+}
+
+.coffee-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.stats-container {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(106, 61, 42, 0.9);
+  margin-top: 0;
+  z-index: 2;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.stat-number {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.stat-text {
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+@media screen and (max-width: 1440px) {
+  .right-content {
+    left: 50%;
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .landing-content {
+    flex-direction: column;
+  }
+  
+  .left-content {
+    width: 100%;
+    padding: 20px;
+    padding-top: 100px;
+    padding-bottom: 0;
+  }
+  
+  .right-content {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    left: 0;
+  }
+  
+  .social-icons-container {
+    justify-content: flex-start;
+  }
+}
+
+.coffee-bean-bg {
+  position: absolute;
+  width: 698.03px;
+  height: 425.98px;
+  top: 264.72px;
+  left: 289.52px;
+  background-image: url('../assets/coffee-bean.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: rotate(-177.99deg);
+  opacity: 0.5;
+  z-index: 1;
+} 

@@ -110,8 +110,8 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: rgba(106, 61, 42, 0.9);
-  margin-top: 0;
+  background-color: #4D3D2E;
+  margin-top: auto;
   z-index: 2;
 }
 

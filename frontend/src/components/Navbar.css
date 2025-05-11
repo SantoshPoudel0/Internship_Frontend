@@ -1,14 +1,14 @@
 .navbar {
   background: transparent;
-  height: 80px;
+  height: 83px;
+  width: 625px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1rem;
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 40px;
+  left: 488px;
   z-index: 999;
 }
 
@@ -17,20 +17,22 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 0 5%;
+  height: 100%;
+  padding: 0 20px;
   position: relative;
 }
 
 .nav-left, .nav-right {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 30px;
 }
 
 .navbar-logo {
   position: absolute;
-  left: 721px;
-  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
   display: flex;
   justify-content: center;
   text-decoration: none;
@@ -63,11 +65,7 @@
 }
 
 .nav-link[href="/trainings"] {
-  position: absolute;
-  width: 83px;
-  height: 24px;
-  top: 61px;
-  left: 863px;
+  position: relative;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -77,11 +75,7 @@
 }
 
 .nav-link[href="/contact"] {
-  position: absolute;
-  width: 66px;
-  height: 24px;
-  top: 60px;
-  left: 986px;
+  position: relative;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -91,11 +85,7 @@
 }
 
 .search-icon {
-  position: absolute;
-  width: 21px;
-  height: 21px;
-  top: 61px;
-  left: 1092px;
+  position: relative;
   color: #FFFFFF;
   cursor: pointer;
   display: flex;
@@ -104,6 +94,12 @@
 }
 
 @media screen and (max-width: 1440px) {
+  .navbar {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 625px;
+  }
+  
   .navbar-logo {
     left: 50%;
     transform: translateX(-50%);
@@ -119,16 +115,20 @@
 }
 
 @media screen and (max-width: 768px) {
-  .navbar-container {
-    flex-direction: column;
-    padding: 1rem;
-  }
-  
   .navbar {
     height: auto;
+    width: 100%;
     position: relative;
     padding: 1rem 0;
     background-color: #fff;
+    left: 0;
+    top: 0;
+    transform: none;
+  }
+  
+  .navbar-container {
+    flex-direction: column;
+    padding: 1rem;
   }
   
   .nav-left, .nav-right {

@@ -22,6 +22,7 @@ function Home() {
         <div className="landing-content">
           <div className="left-content">
             <h1>From Crop To Cup</h1>
+          
             <p>Himalayan Java Coffee Beans are grown locally and are roasted to perfection in the ideal Himalayan air. It is then packaged immediately and rushed off to our outlets which ensures we deliver the best coffee experience possible for all of our customers.</p>
             <div className="cta-buttons">
               <button className="btn-primary">See Menu</button>

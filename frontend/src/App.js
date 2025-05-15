@@ -1,34 +1,81 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import './App.css';
 
+// This component handles scrolling to sections when the URL has a hash
+function ScrollToSection() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if there's a hash in the URL
+    if (location.hash) {
+      // Add a slight delay to ensure DOM is fully loaded
+      setTimeout(() => {
+        // Get the element by ID (removing the # from the hash)
+        const elementId = location.hash.substring(1);
+        const element = document.getElementById(elementId);
+        
+        if (element) {
+          // Scroll to the element smoothly
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    } else if (location.pathname === '/services') {
+      // If we're on the /services route, navigate to home with services hash
+      navigate('/#services', { replace: true });
+    }
+  }, [location, navigate]);
+
+  return null;
+}
+
 function App() {
   return (
     <Router>
+      <Routes>
+        <Route path="*" element={<AppContent />} />
+      </Routes>
+    </Router>
+  );
+}
+
+function AppContent() {
+  return (
+    <>
       <Navbar />
+      <ScrollToSection />
       <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
+          <Route path="/services" element={<ServiceRedirect />} />
           <Route path="/trainings" element={<Trainings />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/search" element={<Search />} />
         </Routes>
       </div>
-    </Router>
+    </>
   );
+}
+
+// Improved service redirect component
+function ServiceRedirect() {
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    // Use navigate instead of direct window.location for better SPA behavior
+    navigate('/#services', { replace: true });
+  }, [navigate]);
+  
+  return null;
 }
 
 // Placeholder components
 function About() {
   return <h1>About Page</h1>;
-}
-
-function Services() {
-  return <h1>Services Page</h1>;
 }
 
 function Trainings() {

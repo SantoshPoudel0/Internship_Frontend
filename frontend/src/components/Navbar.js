@@ -1,18 +1,71 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 function Navbar() {
+  const navigate = useNavigate();
+  
+  const handleServicesClick = (e) => {
+    e.preventDefault();
+    
+    // Check if we're already on the home page
+    if (window.location.pathname === '/') {
+      // If on home page, just scroll to the services section smoothly
+      const servicesSection = document.getElementById('services');
+      if (servicesSection) {
+        servicesSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If on another page, navigate to home page with services hash
+      navigate('/#services');
+    }
+  };
+  
+  const handleAboutClick = (e) => {
+    e.preventDefault();
+    
+    // Check if we're already on the home page
+    if (window.location.pathname === '/') {
+      // If on home page, just scroll to the outlets section smoothly
+      const outletsSection = document.getElementById('outlets');
+      if (outletsSection) {
+        outletsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If on another page, navigate to home page with outlets hash
+      navigate('/#outlets');
+    }
+  };
+  
+  const handleMenuClick = (e) => {
+    e.preventDefault();
+    
+    // Check if we're already on the home page
+    if (window.location.pathname === '/') {
+      // If on home page, just scroll to the menu section smoothly
+      const menuSection = document.getElementById('menu');
+      if (menuSection) {
+        menuSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If on another page, navigate to home page with menu hash
+      navigate('/#menu');
+    }
+  };
+  
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <div className="nav-left">
-          <Link to="/about" className="nav-link">
+          <a href="#outlets" className="nav-link" onClick={handleAboutClick}>
             About
-          </Link>
-          <Link to="/services" className="nav-link">
+          </a>
+          <a href="#services" className="nav-link" onClick={handleServicesClick}>
             Services
-          </Link>
+          </a>
+          <a href="#menu" className="nav-link" onClick={handleMenuClick}>
+            Menu
+          </a>
         </div>
         
         <Link to="/" className="navbar-logo">

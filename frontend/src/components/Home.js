@@ -1,7 +1,17 @@
 import React from 'react';
+import Services from './Services';
+import Outlets from './Outlets';
+import Menu from './Menu';
 import './Home.css';
 
 function Home() {
+  const scrollToMenu = () => {
+    const menuSection = document.getElementById('menu');
+    if (menuSection) {
+      menuSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="home">
       <section className="landing-section">
@@ -25,7 +35,7 @@ function Home() {
           
             <p>Himalayan Java Coffee Beans are grown locally and are roasted to perfection in the ideal Himalayan air. It is then packaged immediately and rushed off to our outlets which ensures we deliver the best coffee experience possible for all of our customers.</p>
             <div className="cta-buttons">
-              <button className="btn-primary">See Menu</button>
+              <button className="btn-primary" onClick={scrollToMenu}>See Menu</button>
             </div>
             <div className="social-icons-container">
               <a href="#" className="social-icon"><i className="fab fa-facebook-f"></i></a>
@@ -52,6 +62,15 @@ function Home() {
           </div>
         </div>
       </section>
+      
+      {/* Services Section */}
+      <Services />
+      
+      {/* Outlets Section */}
+      <Outlets />
+      
+      {/* Menu Section */}
+      <Menu />
     </div>
   );
 }

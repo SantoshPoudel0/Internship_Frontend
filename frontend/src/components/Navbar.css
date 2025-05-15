@@ -60,6 +60,14 @@
   transition: all 0.3s ease;
 }
 
+/* Specific styling for About and Services links */
+.nav-link[href="/about"],
+.nav-link[href="#services"],
+.nav-link[href="#outlets"],
+.nav-link[href="#menu"] {
+  color: #747474;
+}
+
 .nav-link:hover {
   color: #997950;
 }

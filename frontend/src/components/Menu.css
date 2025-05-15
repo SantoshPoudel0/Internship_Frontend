@@ -1,0 +1,155 @@
+.menu-section {
+  width: 1183px;
+  position: absolute;
+  top: 2600px;
+  left: 147px;
+  padding: 80px 0;
+  background-color: #FFFFFF;
+  scroll-margin-top: 100px;
+  box-sizing: border-box;
+}
+
+.menu-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.menu-header {
+  position: relative;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.menu-header h1 {
+  font-size: 42px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.menu-description {
+  max-width: 750px;
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #666;
+  text-align: center;
+}
+
+.view-all {
+  position: absolute;
+  right: 0;
+  top: 10px;
+  font-size: 16px;
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.view-all:hover {
+  text-decoration: underline;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 45px 30px;
+}
+
+.menu-item {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-image {
+  width: 100%;
+  height: 170px;
+  overflow: hidden;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.menu-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.menu-item:hover .menu-image img {
+  transform: scale(1.05);
+}
+
+.menu-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 8px;
+}
+
+.menu-details h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  max-width: 70%;
+}
+
+.menu-details .price {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+  font-weight: 400;
+  text-align: right;
+}
+
+.menu-details .description {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+  font-style: italic;
+  text-align: right;
+}
+
+@media screen and (max-width: 992px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+  
+  .view-all {
+    position: static;
+    display: block;
+    margin-top: 20px;
+    text-align: right;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .menu-header h1 {
+    font-size: 32px;
+  }
+  
+  .menu-description {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .menu-section {
+    width: 100%;
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-top: 100px;
+  }
+  
+  /* ... existing media query code ... */
+}

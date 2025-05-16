@@ -37,22 +37,6 @@ function Navbar() {
     }
   };
   
-  const handleMenuClick = (e) => {
-    e.preventDefault();
-    
-    // Check if we're already on the home page
-    if (window.location.pathname === '/') {
-      // If on home page, just scroll to the menu section smoothly
-      const menuSection = document.getElementById('menu');
-      if (menuSection) {
-        menuSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      // If on another page, navigate to home page with menu hash
-      navigate('/#menu');
-    }
-  };
-  
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -62,9 +46,6 @@ function Navbar() {
           </a>
           <a href="#services" className="nav-link" onClick={handleServicesClick}>
             Services
-          </a>
-          <a href="#menu" className="nav-link" onClick={handleMenuClick}>
-            Menu
           </a>
         </div>
         

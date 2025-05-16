@@ -1,41 +1,54 @@
 .menu-section {
-  width: 1183px;
-  position: absolute;
-  top: 2600px;
-  left: 147px;
-  padding: 80px 0;
-  background-color: #FFFFFF;
+  width: 100%;
+  max-width: 1200px;
+  position: static;
+  padding: 0;
+  background-color: transparent;
   scroll-margin-top: 100px;
   box-sizing: border-box;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .menu-container {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
 }
 
 .menu-header {
-  position: relative;
-  margin-bottom: 60px;
+  position: absolute;
+  top: 2200px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 110px;
   text-align: center;
+  width: 1200px;
+  background-color: transparent;
+  z-index: 1;
 }
 
 .menu-header h1 {
   font-size: 42px;
   font-weight: bold;
   color: #000;
-  margin-bottom: 20px;
+  margin-bottom: 0;
   text-align: center;
 }
 
 .menu-description {
   max-width: 750px;
-  margin: 0 auto;
+  margin: 0 auto 50px;
   font-size: 18px;
   line-height: 1.6;
   color: #666;
   text-align: center;
+  background-color: transparent;
+  position: relative;
 }
 
 .view-all {
@@ -55,27 +68,48 @@
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 45px 30px;
+  gap: 40px 60px;
+  position: absolute;
+  width: 1200px;
+  height: 835px;
+  top: 2392px;
+  left: 50%;
+  transform: translateX(-50%);
+  justify-content: space-between;
+  align-items: center;
+  background-color: #F6EDE0;
+  border-radius: 10px;
+  padding: 40px 80px;
+  box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .menu-item {
   background-color: transparent;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  position: relative;
+  min-width: 180px;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+  width: 100%;
 }
 
 .menu-image {
-  width: 100%;
-  height: 170px;
+  width: 130px;
+  height: 130px;
   overflow: hidden;
   border-radius: 5px;
-  margin-bottom: 10px;
+  margin-right: 20px;
+  flex-shrink: 0;
 }
 
 .menu-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 5px;
   transition: transform 0.3s ease;
 }
 
@@ -85,25 +119,27 @@
 
 .menu-details {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: flex-start;
-  margin-top: 8px;
+  margin-top: 0;
 }
 
 .menu-details h3 {
   font-size: 18px;
   font-weight: 600;
-  color: #333;
-  margin: 0;
-  max-width: 70%;
+  color: #000;
+  margin: 0 0 5px 0;
+  text-align: left;
+  width: 100%;
+  white-space: nowrap;
 }
 
 .menu-details .price {
   font-size: 16px;
-  color: #666;
+  color: #6f7789;
   margin: 0;
   font-weight: 400;
-  text-align: right;
+  text-align: left;
 }
 
 .menu-details .description {
@@ -111,13 +147,46 @@
   color: #666;
   margin: 0;
   font-style: italic;
-  text-align: right;
+  text-align: left;
+}
+
+@media screen and (max-width: 1200px) {
+  .menu-section {
+    width: 100%;
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-top: 100px;
+  }
+  
+  .menu-header {
+    position: relative;
+    top: auto;
+    width: 100%;
+    transform: none;
+    left: auto;
+  }
+  
+  .menu-grid {
+    position: relative;
+    top: auto;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .menu-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media screen and (max-width: 992px) {
   .menu-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
   
   .view-all {
@@ -140,16 +209,4 @@
   .menu-description {
     font-size: 16px;
   }
-}
-
-@media screen and (max-width: 1200px) {
-  .menu-section {
-    width: 100%;
-    position: relative;
-    top: auto;
-    left: auto;
-    margin-top: 100px;
-  }
-  
-  /* ... existing media query code ... */
 }

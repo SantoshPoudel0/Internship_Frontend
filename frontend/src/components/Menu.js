@@ -27,7 +27,7 @@ function Menu() {
           
           <div className="menu-item">
             <div className="menu-image">
-              <img src="/images/menu/blended-mocha.jpg" alt="Blended Mocha" />
+              <img src="/images/menu/mocha.png" alt="Blended Mocha" />
             </div>
             <div className="menu-details">
               <h3>Blended Mocha</h3>
@@ -37,7 +37,7 @@ function Menu() {
           
           <div className="menu-item">
             <div className="menu-image">
-              <img src="/images/menu/blended-frappe.jpg" alt="Blended Frappe" />
+              <img src="/images/menu/frappe.png" alt="Blended Frappe" />
             </div>
             <div className="menu-details">
               <h3>Blended Frappe</h3>
@@ -47,7 +47,7 @@ function Menu() {
           
           <div className="menu-item">
             <div className="menu-image">
-              <img src="/images/menu/cappucino.jpg" alt="Cappucino" />
+              <img src="/images/menu/cappucino.png" alt="Cappucino" />
             </div>
             <div className="menu-details">
               <h3>Cappucino</h3>
@@ -57,7 +57,7 @@ function Menu() {
           
           <div className="menu-item">
             <div className="menu-image">
-              <img src="/images/menu/caffe-latte.jpg" alt="Caffe Latte" />
+              <img src="/images/menu/latte.png" alt="Caffe Latte" />
             </div>
             <div className="menu-details">
               <h3>Caffe Latte</h3>
@@ -67,7 +67,7 @@ function Menu() {
           
           <div className="menu-item">
             <div className="menu-image">
-              <img src="/images/menu/milk-tea.jpg" alt="Milk tea" />
+              <img src="/images/menu/milktea.png" alt="Milk tea" />
             </div>
             <div className="menu-details">
               <h3>Milk tea</h3>
@@ -77,7 +77,7 @@ function Menu() {
           
           <div className="menu-item">
             <div className="menu-image">
-              <img src="/images/menu/cafe-latte-cookie.jpg" alt="Cafe latte with Cookie" />
+              <img src="/images/menu/cookie.png" alt="Cafe latte with Cookie" />
             </div>
             <div className="menu-details">
               <h3>Cafe latte with Cookie</h3>
@@ -87,7 +87,7 @@ function Menu() {
           
           <div className="menu-item">
             <div className="menu-image">
-              <img src="/images/menu/croissant.jpg" alt="Croosiant" />
+              <img src="/images/menu/croosiant.png" alt="Croosiant" />
             </div>
             <div className="menu-details">
               <h3>Croosiant</h3>
@@ -97,7 +97,7 @@ function Menu() {
           
           <div className="menu-item">
             <div className="menu-image">
-              <img src="/images/menu/baguette.jpg" alt="Baguette" />
+              <img src="/images/menu/baguette.png" alt="Baguette" />
             </div>
             <div className="menu-details">
               <h3>Baguette</h3>
@@ -107,7 +107,7 @@ function Menu() {
           
           <div className="menu-item">
             <div className="menu-image">
-              <img src="/images/menu/rolls.jpg" alt="Rolls" />
+              <img src="/images/menu/rolls.png" alt="Rolls" />
             </div>
             <div className="menu-details">
               <h3>Rolls</h3>
@@ -117,7 +117,7 @@ function Menu() {
           
           <div className="menu-item">
             <div className="menu-image">
-              <img src="/images/menu/cheese-cake.jpg" alt="Cheese cake" />
+              <img src="/images/menu/cheesecake.png" alt="Cheese cake" />
             </div>
             <div className="menu-details">
               <h3>Cheese cake</h3>
@@ -127,7 +127,7 @@ function Menu() {
           
           <div className="menu-item">
             <div className="menu-image">
-              <img src="/images/menu/brownie-icecream.jpg" alt="Brownie with Icecream" />
+              <img src="/images/menu/brownie.png" alt="Brownie with Icecream" />
             </div>
             <div className="menu-details">
               <h3>Brownie with Icecream</h3>
@@ -137,7 +137,7 @@ function Menu() {
           
           <div className="menu-item">
             <div className="menu-image">
-              <img src="/images/menu/iced-americano.jpg" alt="Iced Americano" />
+              <img src="/images/menu/americano.png" alt="Iced Americano" />
             </div>
             <div className="menu-details">
               <h3>Iced Americano</h3>
@@ -147,7 +147,7 @@ function Menu() {
           
           <div className="menu-item">
             <div className="menu-image">
-              <img src="/images/menu/flat-white.jpg" alt="Flat white" />
+              <img src="/images/menu/flatwhite.png" alt="Flat white" />
             </div>
             <div className="menu-details">
               <h3>Flat white</h3>
@@ -157,7 +157,7 @@ function Menu() {
           
           <div className="menu-item">
             <div className="menu-image">
-              <img src="/images/menu/matcha-latte.jpg" alt="Matcha Latte" />
+              <img src="/images/menu/latte.png" alt="Matcha Latte" />
             </div>
             <div className="menu-details">
               <h3>Matcha Latte</h3>

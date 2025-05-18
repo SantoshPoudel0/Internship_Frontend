@@ -2,14 +2,15 @@ import React from 'react';
 import Services from './Services';
 import Outlets from './Outlets';
 import Menu from './Menu';
+import Reviews from './Reviews';
 import './Home.css';
 
 function Home() {
   const scrollToMenu = () => {
-    const menuSection = document.getElementById('menu');
-    if (menuSection) {
-      menuSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    window.scrollTo({
+      top: 2200,
+      behavior: 'smooth'
+    });
   };
 
   return (
@@ -71,6 +72,9 @@ function Home() {
       
       {/* Menu Section */}
       <Menu />
+      
+      {/* Reviews Section */}
+      <Reviews />
     </div>
   );
 }

@@ -24,6 +24,9 @@ function Navbar() {
   // Check if current page is training page
   const isTrainingPage = location.pathname === '/trainings';
   
+  // Set the search icon stroke color based on current page
+  const searchIconColor = isTrainingPage ? '#747474' : '#FFFFFF';
+  
   // Handle clicks outside of search area
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -175,8 +178,8 @@ function Navbar() {
           <div className="navbar-search-container">
             <a href="#" className="search-icon" onClick={toggleSearch} ref={searchIconRef}>
               <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10.5 18C14.6421 18 18 14.6421 18 10.5C18 6.35786 14.6421 3 10.5 3C6.35786 3 3 6.35786 3 10.5C3 14.6421 6.35786 18 10.5 18Z" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round"/>
-                <path d="M21 21L16 16" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round"/>
+                <path d="M10.5 18C14.6421 18 18 14.6421 18 10.5C18 6.35786 14.6421 3 10.5 3C6.35786 3 3 6.35786 3 10.5C3 14.6421 6.35786 18 10.5 18Z" stroke={searchIconColor} strokeWidth="2.5" strokeLinecap="round"/>
+                <path d="M21 21L16 16" stroke={searchIconColor} strokeWidth="2.5" strokeLinecap="round"/>
               </svg>
             </a>
           </div>
@@ -184,24 +187,25 @@ function Navbar() {
       </div>
       
       {showSearch && (
-        <div className="navbar-search-overlay" ref={searchRef}>
-          <div className="navbar-search-wrapper">
+        <div className={`navbar-search-overlay ${isTrainingPage ? 'training-search' : ''}`} ref={searchRef}>
+          <div className={`navbar-search-wrapper ${isTrainingPage ? 'training-search' : ''}`}>
             <input
               id="navbar-search-input"
               type="text"
               placeholder="Search..."
               value={query}
               onChange={handleSearchChange}
+              className={isTrainingPage ? 'training-search-input' : ''}
             />
-            <button className="navbar-search-close" onClick={toggleSearch}>
+            <button className={`navbar-search-close ${isTrainingPage ? 'training-close' : ''}`} onClick={toggleSearch}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18 6L6 18" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M6 6L18 18" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M18 6L6 18" stroke={isTrainingPage ? "#747474" : "#FFFFFF"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M6 6L18 18" stroke={isTrainingPage ? "#747474" : "#FFFFFF"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
             
             {results.length > 0 && (
-              <div className="navbar-search-results">
+              <div className={`navbar-search-results ${isTrainingPage ? 'training-results' : ''}`}>
                 {results.map((result, index) => (
                   <div 
                     key={index} 

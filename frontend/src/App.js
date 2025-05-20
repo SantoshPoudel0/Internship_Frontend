@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Training from './components/Training';
 import Contact from './components/Contact';
+import { preloadCriticalImages } from './utils/preloadImages';
 import './App.css';
 
 // This component handles scrolling to sections when the URL has a hash
@@ -36,6 +37,22 @@ function ScrollToSection() {
 }
 
 function App() {
+  const [imagesPreloaded, setImagesPreloaded] = useState(false);
+  
+  useEffect(() => {
+    // Preload critical images on initial app load
+    preloadCriticalImages()
+      .then(() => {
+        console.log('Critical images preloaded');
+        setImagesPreloaded(true);
+      })
+      .catch(error => {
+        console.warn('Error preloading images:', error);
+        // Still mark as preloaded even if there was an error to prevent blocking the UI
+        setImagesPreloaded(true);
+      });
+  }, []);
+
   return (
     <Router>
       <Routes>

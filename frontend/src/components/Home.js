@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Services from './Services';
 import Outlets from './Outlets';
 import Menu from './Menu';
 import Reviews from './Reviews';
 import Footer from './Footer';
+import { preloadImages } from '../utils/preloadImages';
 import './Home.css';
 
 function Home() {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const coffeeImage = '/cofee-image-homepage.svg';
+
+  useEffect(() => {
+    // Ensure the coffee image is loaded when component mounts
+    const img = new Image();
+    img.src = coffeeImage;
+    
+    // If image is already in browser cache, onload will fire immediately
+    img.onload = () => setImageLoaded(true);
+    
+    // If image loading takes time, at least update state after brief timeout
+    const timeout = setTimeout(() => {
+      setImageLoaded(true);
+    }, 100);
+    
+    return () => clearTimeout(timeout);
+  }, []);
+  
   const scrollToMenu = () => {
     window.scrollTo({
       top: 2200,
@@ -46,7 +66,12 @@ function Home() {
             </div>
           </div>
           <div className="right-content">
-            <img src="/cofee-image-homepage.svg" alt="Coffee" className="coffee-image" />
+            <img 
+              src={coffeeImage} 
+              alt="Coffee" 
+              className={`coffee-image ${imageLoaded ? 'loaded' : ''}`} 
+              style={{ visibility: imageLoaded ? 'visible' : 'hidden' }} 
+            />
             <div className="stats-container">
               <div className="stat-item">
                 <span className="stat-number">7</span>

@@ -116,6 +116,12 @@
   object-fit: cover;
   object-position: center;
   display: block;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.coffee-image.loaded {
+  opacity: 1;
 }
 
 .stats-container {

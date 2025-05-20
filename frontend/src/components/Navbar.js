@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Navbar.css';
+import { preloadImages } from '../utils/preloadImages';
 
 // Sample search data - in a real application this would come from a database or API
 const searchData = [
@@ -150,6 +151,12 @@ function Navbar() {
   const contactLinkStyle = isTrainingPage || isContactPage ? { color: '#747474' } : {};
   const trainingsLinkStyle = isContactPage ? { color: '#747474' } : {};
   
+  // Handle home link click
+  const handleHomeClick = (e) => {
+    // Preload the home page image when navigating to home
+    preloadImages(['/cofee-image-homepage.svg', '/coffeeHouse.svg']);
+  };
+  
   return (
     <nav className={`navbar ${isTrainingPage ? 'training-page' : ''}`}>
       <div className="navbar-container">
@@ -162,7 +169,7 @@ function Navbar() {
           </a>
         </div>
         
-        <Link to="/" className="navbar-logo">
+        <Link to="/" className="navbar-logo" onClick={handleHomeClick}>
           <img src="/coffeeHouse.svg" alt="Coffeehouse" />
         </Link>
         

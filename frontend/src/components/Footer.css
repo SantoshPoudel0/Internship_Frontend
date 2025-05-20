@@ -1,11 +1,14 @@
 .footer {
     background-color: #fffdf8;
-    padding: 40px 120px;
+    padding: 120px 120px 80px; /* Increased padding top and bottom */
     font-family: Arial, sans-serif;
     color: #000;
     position: relative;
     z-index: 100;
     margin-top: 3500px; /* Further reduced to bring footer closer to reviews section */
+    min-height: 100vh; /* Makes footer take at least full viewport height */
+    box-sizing: border-box;
+    scroll-margin-top: 100px; /* Helps with scrolling to this section */
   }
   
   .footer-sections {
@@ -16,6 +19,7 @@
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 60px; /* Added padding to push content down */
   }
   
   .footer-nav ul {
@@ -27,15 +31,26 @@
   .footer-nav li {
     margin-bottom: 10px;
     cursor: pointer;
+    font-size: 18px; /* Increased font size */
+    padding: 5px 0; /* Added padding for better spacing */
+  }
+  
+  .footer-contact {
+    font-family: 'Poppins', sans-serif;
   }
   
   .footer-contact h4 {
-    margin-bottom: 10px;
-    font-weight: bold;
+    margin-bottom: 15px;
+    font-weight: 500;
+    font-size: 28px; /* Larger heading */
+    font-family: 'Poppins', sans-serif;
   }
   
   .footer-contact p {
-    margin: 5px 0;
+    margin: 8px 0;
+    font-size: 18px; /* Increased font size */
+    line-height: 1.6; /* Better line height for readability */
+    font-family: 'Poppins', sans-serif;
   }
   
   .footer-map iframe {

@@ -20,7 +20,7 @@
 
 /* Highlight Contact link when on training page */
 .navbar.training-page .nav-link[href="#contact"] {
-  color: #747474 !important; /* Same color as Services link */
+  color: #747474; /* Same color as Services link */
   font-weight: 400;
 }
 
@@ -110,7 +110,7 @@
   align-items: center;
   padding: 0;
   font-size: 16px;
-  transition: all 0.3s ease;
+  transition: none;
 }
 
 /* Specific styling for About and Services links */
@@ -133,6 +133,7 @@
   line-height: 100%;
   letter-spacing: 0%;
   color: #FFFDF8;
+  transition: none;
 }
 
 .nav-link[href="/contact"], 
@@ -144,6 +145,32 @@
   line-height: 100%;
   letter-spacing: 0%;
   color: #FFFDF8;
+  transition: none;
+}
+
+/* Ensure contact link stays white by default but can be overridden */
+.nav-link[href="/contact"]:hover,
+.nav-link[href="/contact"]:active,
+.nav-link[href="/contact"]:focus,
+.nav-link[href="/contact"]:visited {
+  color: #FFFDF8;
+}
+
+/* Override training page styling for contact link */
+.navbar.training-page .nav-link[href="/contact"] {
+  color: #747474;
+}
+
+/* In training page, also change the #contact link color */
+.navbar.training-page .nav-link[href="#contact"] {
+  color: #747474;
+}
+
+/* Update the contact link positioning */
+.nav-link[href="/trainings"],
+.nav-link[href="/contact"] {
+  position: relative;
+  left: 15px;
 }
 
 .search-icon {
@@ -321,11 +348,4 @@
   #navbar-search-input {
     width: 100%;
   }
-}
-
-/* Position the Trainings, Contact links and Search icon slightly to the right */
-.nav-link[href="/trainings"],
-.nav-link[href="#contact"] {
-  position: relative;
-  left: 15px;
 } 

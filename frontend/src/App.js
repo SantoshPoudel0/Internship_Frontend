@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Training from './components/Training';
+import Contact from './components/Contact';
 import './App.css';
 
 // This component handles scrolling to sections when the URL has a hash
@@ -27,10 +28,8 @@ function ScrollToSection() {
     } else if (location.pathname === '/services') {
       // If we're on the /services route, navigate to home with services hash
       navigate('/#services', { replace: true });
-    } else if (location.pathname === '/contact') {
-      // If we're on the /contact route, navigate to home with contact hash
-      navigate('/#contact', { replace: true });
     }
+    // Removed the contact redirect since we now have a dedicated Contact page
   }, [location, navigate]);
 
   return null;
@@ -86,10 +85,6 @@ function Trainings() {
       <Training />
     </div>
   );
-}
-
-function Contact() {
-  return <h1>Contact Page</h1>;
 }
 
 export default App;

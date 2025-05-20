@@ -24,8 +24,11 @@ function Navbar() {
   // Check if current page is training page
   const isTrainingPage = location.pathname === '/trainings';
   
+  // Check if current page is contact page
+  const isContactPage = location.pathname === '/contact';
+  
   // Set the search icon stroke color based on current page
-  const searchIconColor = isTrainingPage ? '#747474' : '#FFFFFF';
+  const searchIconColor = isTrainingPage ? '#747474' : (isContactPage ? '#747474' : '#FFFFFF');
   
   // Handle clicks outside of search area
   useEffect(() => {
@@ -90,17 +93,8 @@ function Navbar() {
   const handleContactClick = (e) => {
     e.preventDefault();
     
-    // Check if we're already on the home page
-    if (window.location.pathname === '/') {
-      // If on home page, just scroll to the contact section smoothly
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      // If on another page, navigate to home page with contact hash
-      navigate('/#contact');
-    }
+    // Navigate to dedicated Contact page
+    navigate('/contact');
   };
   
   const toggleSearch = (e) => {
@@ -152,6 +146,10 @@ function Navbar() {
     console.log('Trainings link clicked, navigating to /trainings');
   };
   
+  // Use this simple style approach
+  const contactLinkStyle = isTrainingPage || isContactPage ? { color: '#747474' } : {};
+  const trainingsLinkStyle = isContactPage ? { color: '#747474' } : {};
+  
   return (
     <nav className={`navbar ${isTrainingPage ? 'training-page' : ''}`}>
       <div className="navbar-container">
@@ -169,12 +167,12 @@ function Navbar() {
         </Link>
         
         <div className="nav-right">
-          <Link to="/trainings" className="nav-link" onClick={handleTrainingsClick}>
+          <Link to="/trainings" className="nav-link" onClick={handleTrainingsClick} style={trainingsLinkStyle}>
             Trainings
           </Link>
-          <a href="#contact" className="nav-link" onClick={handleContactClick}>
+          <Link to="/contact" className="nav-link" onClick={handleContactClick} style={contactLinkStyle}>
             Contact
-          </a>
+          </Link>
           <div className="navbar-search-container">
             <a href="#" className="search-icon" onClick={toggleSearch} ref={searchIconRef}>
               <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

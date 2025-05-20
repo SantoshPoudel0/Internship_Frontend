@@ -13,9 +13,15 @@
 }
 
 /* Special styling for navbar on training page */
-.navbar.training-page .nav-link[href="/trainings"],
-.navbar.training-page .nav-link[href="/contact"] {
-  color: #747474 !important;
+.navbar.training-page .nav-link[href="/trainings"] {
+  color: #747474 !important; /* Same color as Services link */
+  font-weight: 400;
+}
+
+/* Highlight Contact link when on training page */
+.navbar.training-page .nav-link[href="#contact"] {
+  color: #747474 !important; /* Same color as Services link */
+  font-weight: 400;
 }
 
 /* Ensure About and Services links remain the same on training page */

@@ -37,6 +37,10 @@ function Navbar() {
     }
   };
   
+  const handleTrainingsClick = () => {
+    console.log('Trainings link clicked, navigating to /trainings');
+  };
+  
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -54,7 +58,7 @@ function Navbar() {
         </Link>
         
         <div className="nav-right">
-          <Link to="/trainings" className="nav-link">
+          <Link to="/trainings" className="nav-link" onClick={handleTrainingsClick}>
             Trainings
           </Link>
           <Link to="/contact" className="nav-link">

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
+import Training from './components/Training';
 import './App.css';
 
 // This component handles scrolling to sections when the URL has a hash
@@ -47,16 +48,14 @@ function AppContent() {
     <>
       <Navbar />
       <ScrollToSection />
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<ServiceRedirect />} />
-          <Route path="/trainings" element={<Trainings />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/search" element={<Search />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<ServiceRedirect />} />
+        <Route path="/trainings" element={<Trainings />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/search" element={<Search />} />
+      </Routes>
     </>
   );
 }
@@ -79,7 +78,12 @@ function About() {
 }
 
 function Trainings() {
-  return <h1>Trainings Page</h1>;
+  console.log('Training component is rendering');
+  return (
+    <div style={{marginTop: '80px'}}>
+      <Training />
+    </div>
+  );
 }
 
 function Contact() {

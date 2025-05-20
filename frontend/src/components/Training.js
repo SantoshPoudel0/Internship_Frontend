@@ -1,23 +1,59 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Training.css';
 
-function Training() {
-  // Force immediate loading of all training images
-  useEffect(() => {
-    // Get all image elements
-    const images = document.querySelectorAll('.training-image img, .certification-image img');
-    
-    // Set high priority for all images
-    images.forEach(img => {
-      if (img.loading === 'lazy') {
-        img.loading = 'eager';
-      }
-      if ('fetchPriority' in img) {
-        img.fetchPriority = 'high';
-      }
-    });
-  }, []);
+// Training courses data with images that match the course titles
+const trainingCourses = [
+  {
+    id: 1,
+    title: 'Barista Basics',
+    price: 'RS 2,500',
+    duration: '2 Days',
+    description: 'Master espresso extraction, milk texturing techniques, and basic drink preparation. Ideal for beginners and home enthusiasts.',
+    image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+  },
+  {
+    id: 2,
+    title: 'Advanced Latte Art',
+    price: 'RS 3,200',
+    duration: '3 Days',
+    description: 'Create intricate designs including rosettas, hearts, tulips, and swans. Learn pouring techniques from award-winning baristas.',
+    image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+  },
+  {
+    id: 3,
+    title: 'Coffee Tasting',
+    price: 'RS 1,800',
+    duration: '1 Day',
+    description: 'Train your palate to identify flavor notes, acidity, body, and aroma. Includes cupping sessions with single-origin beans from around the world.',
+    image: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+  },
+  {
+    id: 4,
+    title: 'Brewing Methods',
+    price: 'RS 2,200',
+    duration: '2 Days',
+    description: 'Compare pour-over, AeroPress, French press, and siphon brewing. Learn optimal grind sizes, water temperatures, and brewing ratios.',
+    image: 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+  },
+  {
+    id: 5,
+    title: 'Coffee Roasting Workshop',
+    price: 'RS 4,500',
+    duration: '3 Days',
+    description: 'Understand first crack, development time, and roast profiles. Practice on commercial drum roasters with specialty green beans.',
+    image: 'https://images.unsplash.com/photo-1515283709260-ee29296f1534?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+  },
+  {
+    id: 6,
+    title: 'Café Management',
+    price: 'RS 5,800',
+    duration: '5 Days',
+    description: 'Learn inventory management, staff training, equipment maintenance, pricing strategies, and customer experience optimization.',
+    image: 'https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+  }
+];
 
+function Training() {
   return (
     <section id="training" className="training-section">
       <div className="training-container">
@@ -25,111 +61,35 @@ function Training() {
           <h1>Coffee Training Academy</h1>
           <p className="training-description">
             Join our professional coffee training sessions to master the art of brewing, 
-            latte art, and coffee appreciation. Whether you're a beginner or looking to advance your skills, 
-            we have the perfect course for you.
+            latte art, and coffee appreciation. Our courses are taught by certified coffee experts.
           </p>
         </div>
         
         <div className="training-grid">
-          <div className="training-item">
-            <div className="training-image">
-              <img src="/images/training/barista-basics.jpg" alt="Barista Basics" loading="eager" fetchpriority="high" />
+          {trainingCourses.map(course => (
+            <div key={course.id} className="training-item">
+              <div className="training-image" style={{ backgroundImage: `url(${course.image})` }}>
+                <div className="training-overlay"></div>
+              </div>
+              <div className="training-content">
+                <h3>{course.title}</h3>
+                <p className="training-price">{course.price}</p>
+                <p className="training-duration">Duration: {course.duration}</p>
+                <p className="training-text">{course.description}</p>
+                <button className="enroll-button">Enroll Now</button>
+              </div>
             </div>
-            <div className="training-content">
-              <h3>Barista Basics</h3>
-              <p className="training-price">RS 2,500</p>
-              <p className="training-duration">Duration: 2 Days</p>
-              <p className="training-text">
-                Learn the fundamentals of coffee preparation, machine handling, and basic latte art techniques. Perfect for beginners.
-              </p>
-              <button className="enroll-button">Enroll Now</button>
-            </div>
-          </div>
-          
-          <div className="training-item">
-            <div className="training-image">
-              <img src="/images/training/latte-art.jpg" alt="Advanced Latte Art" loading="eager" fetchpriority="high" />
-            </div>
-            <div className="training-content">
-              <h3>Advanced Latte Art</h3>
-              <p className="training-price">RS 3,200</p>
-              <p className="training-duration">Duration: 3 Days</p>
-              <p className="training-text">
-                Master complex latte art designs, from rosettes to tulips and beyond. For those with basic barista experience.
-              </p>
-              <button className="enroll-button">Enroll Now</button>
-            </div>
-          </div>
-          
-          <div className="training-item">
-            <div className="training-image">
-              <img src="/images/training/coffee-tasting.jpg" alt="Coffee Tasting & Appreciation" loading="eager" fetchpriority="high" />
-            </div>
-            <div className="training-content">
-              <h3>Coffee Tasting & Appreciation</h3>
-              <p className="training-price">RS 1,800</p>
-              <p className="training-duration">Duration: 1 Day</p>
-              <p className="training-text">
-                Develop your palate to identify coffee origins, processing methods, and flavor profiles. Includes tasting of premium coffees.
-              </p>
-              <button className="enroll-button">Enroll Now</button>
-            </div>
-          </div>
-          
-          <div className="training-item">
-            <div className="training-image">
-              <img src="/images/training/brewing-methods.jpg" alt="Alternative Brewing Methods" loading="eager" fetchpriority="high" />
-            </div>
-            <div className="training-content">
-              <h3>Alternative Brewing Methods</h3>
-              <p className="training-price">RS 2,200</p>
-              <p className="training-duration">Duration: 2 Days</p>
-              <p className="training-text">
-                Explore pour-over, AeroPress, French press, and other manual brewing techniques to bring out the best in specialty coffees.
-              </p>
-              <button className="enroll-button">Enroll Now</button>
-            </div>
-          </div>
-          
-          <div className="training-item">
-            <div className="training-image">
-              <img src="/images/training/coffee-roasting.jpg" alt="Coffee Roasting Workshop" loading="eager" fetchpriority="high" />
-            </div>
-            <div className="training-content">
-              <h3>Coffee Roasting Workshop</h3>
-              <p className="training-price">RS 4,500</p>
-              <p className="training-duration">Duration: 3 Days</p>
-              <p className="training-text">
-                Learn the science and art of coffee roasting, from green bean selection to developing flavor profiles through roast curves.
-              </p>
-              <button className="enroll-button">Enroll Now</button>
-            </div>
-          </div>
-          
-          <div className="training-item">
-            <div className="training-image">
-              <img src="/images/training/cafe-management.jpg" alt="Café Management Essentials" loading="eager" fetchpriority="high" />
-            </div>
-            <div className="training-content">
-              <h3>Café Management Essentials</h3>
-              <p className="training-price">RS 5,800</p>
-              <p className="training-duration">Duration: 5 Days</p>
-              <p className="training-text">
-                Comprehensive training on running a successful café, covering operations, staff management, and business strategies.
-              </p>
-              <button className="enroll-button">Enroll Now</button>
-            </div>
-          </div>
+          ))}
         </div>
         
         <div className="certification-section">
           <div className="certification-content">
             <h2>Professional Certification</h2>
-            <p>All our training courses come with internationally recognized certification. Our trainers are industry experts with years of experience in specialty coffee.</p>
-            <p>Group discounts are available for teams of 3 or more people. Contact us for custom training programs for your café or restaurant.</p>
+            <p>All our training courses come with SCA (Specialty Coffee Association) recognized certification. Our trainers have competed in national and international barista championships.</p>
+            <p>Group discounts of 15% are available for teams of 3 or more people. Custom corporate training packages available.</p>
+            <button className="contact-button">Contact Us</button>
           </div>
-          <div className="certification-image">
-            <img src="/images/training/certification.jpg" alt="Coffee Certification" loading="eager" fetchpriority="high" />
+          <div className="certification-image" style={{ backgroundImage: `url(/images/training/sample_certificate.jpg)` }}>
           </div>
         </div>
       </div>

@@ -122,6 +122,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  left: 15px;
 }
 
 .navbar-search-overlay {
@@ -283,4 +284,11 @@
   #navbar-search-input {
     width: 100%;
   }
+}
+
+/* Position the Trainings, Contact links and Search icon slightly to the right */
+.nav-link[href="/trainings"],
+.nav-link[href="#contact"] {
+  position: relative;
+  left: 15px;
 } 

@@ -1,12 +1,10 @@
 .training-section {
   width: 100%;
   position: relative;
-  padding: 100px 0;
+  padding: 160px 0 80px;
   box-sizing: border-box;
   background-color: #fff;
-  min-height: 1200px;
-  /* Optimize for immediate rendering */
-  contain: layout style;
+  margin-top: 20px;
 }
 
 /* Make navbar links visible on training page */
@@ -34,14 +32,14 @@ body:has(.training-section) .search-icon path {
 
 .training-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
 }
 
 .training-header h1 {
-  font-size: 42px;
+  font-size: 38px;
   font-weight: bold;
   color: #000;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .training-description {
@@ -55,89 +53,81 @@ body:has(.training-section) .search-icon path {
 .training-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 50px;
-  margin-bottom: 80px;
-  contain: layout style;
+  gap: 30px;
+  margin-bottom: 60px;
 }
 
 .training-item {
   display: flex;
   flex-direction: column;
   background-color: #F6EDE0;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  contain: content;
-}
-
-.training-item:hover {
-  transform: translateY(-5px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
 .training-image {
-  height: 250px;
-  overflow: hidden;
-  transform: translateZ(0);
-  will-change: transform;
-  background-color: #F6EDE0; /* Placeholder color that matches the container */
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
 
-.training-image img {
+.training-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-  /* Ensure immediate rendering of images */
-  backface-visibility: hidden;
-  transform: translateZ(0);
-}
-
-.training-item:hover .training-image img {
-  transform: scale(1.05);
+  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.2));
 }
 
 .training-content {
-  padding: 25px;
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .training-content h3 {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
   color: #000;
-  margin: 0 0 15px 0;
+  margin: 0 0 10px 0;
 }
 
 .training-price {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   color: #6f7789;
   margin: 0 0 5px 0;
 }
 
 .training-duration {
-  font-size: 16px;
+  font-size: 15px;
   color: #666;
-  margin: 0 0 15px 0;
+  margin: 0 0 10px 0;
 }
 
 .training-text {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.5;
   color: #666;
-  margin: 0 0 20px 0;
+  margin: 0 0 15px 0;
+  flex: 1;
 }
 
 .enroll-button {
   background-color: #8B4513;
   color: white;
   border: none;
-  padding: 12px 25px;
-  font-size: 16px;
+  padding: 10px 20px;
+  font-size: 15px;
   font-weight: 500;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
+  align-self: flex-start;
 }
 
 .enroll-button:hover {
@@ -146,47 +136,57 @@ body:has(.training-section) .search-icon path {
 
 .certification-section {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   background-color: #F6EDE0;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  contain: content;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
 .certification-content {
   flex: 1;
-  padding: 40px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
 .certification-content h2 {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
   color: #000;
-  margin: 0 0 20px 0;
+  margin: 0 0 15px 0;
 }
 
 .certification-content p {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.6;
   color: #666;
   margin: 0 0 15px 0;
 }
 
-.certification-image {
-  flex: 1;
-  height: 350px;
-  transform: translateZ(0);
-  background-color: #F6EDE0; /* Placeholder color that matches the container */
+.contact-button {
+  background-color: #8B4513;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 10px;
+  align-self: flex-start;
 }
 
-.certification-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* Ensure immediate rendering of images */
-  backface-visibility: hidden;
-  transform: translateZ(0);
+.contact-button:hover {
+  background-color: #6B3100;
+}
+
+.certification-image {
+  flex: 1;
+  min-height: 280px;
+  background-size: cover;
+  background-position: center;
 }
 
 @media screen and (max-width: 992px) {
@@ -199,17 +199,17 @@ body:has(.training-section) .search-icon path {
   }
   
   .certification-image {
-    width: 100%;
+    min-height: 200px;
   }
 }
 
 @media screen and (max-width: 576px) {
   .training-section {
-    padding: 60px 0;
+    padding: 50px 0;
   }
   
   .training-header h1 {
-    font-size: 32px;
+    font-size: 28px;
   }
   
   .training-description {
@@ -217,6 +217,6 @@ body:has(.training-section) .search-icon path {
   }
   
   .training-content h3 {
-    font-size: 20px;
+    font-size: 18px;
   }
 }

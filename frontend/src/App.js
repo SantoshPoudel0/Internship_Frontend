@@ -27,6 +27,9 @@ function ScrollToSection() {
     } else if (location.pathname === '/services') {
       // If we're on the /services route, navigate to home with services hash
       navigate('/#services', { replace: true });
+    } else if (location.pathname === '/contact') {
+      // If we're on the /contact route, navigate to home with contact hash
+      navigate('/#contact', { replace: true });
     }
   }, [location, navigate]);
 
@@ -89,7 +92,6 @@ function AppContent() {
         <Route path="/services" element={<ServiceRedirect />} />
         <Route path="/trainings" element={<Trainings />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/search" element={<Search />} />
       </Routes>
     </>
   );
@@ -126,10 +128,6 @@ function Trainings() {
 
 function Contact() {
   return <h1>Contact Page</h1>;
-}
-
-function Search() {
-  return <h1>Search Page</h1>;
 }
 
 export default App;

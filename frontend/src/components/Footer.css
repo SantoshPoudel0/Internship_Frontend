@@ -1,6 +1,6 @@
 .footer {
     background-color: #fffdf8;
-    padding: 40px 20px;
+    padding: 40px 120px;
     font-family: Arial, sans-serif;
     color: #000;
     position: relative;
@@ -13,6 +13,9 @@
     justify-content: space-between;
     flex-wrap: wrap;
     margin-bottom: 30px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .footer-nav ul {
@@ -45,18 +48,34 @@
     align-items: center;
     flex-wrap: wrap;
     font-size: 14px;
-    border-top: 1px solid #ccc;
     padding-top: 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .footer-social a {
     margin: 0 10px;
-    color: #000;
     text-decoration: none;
     font-size: 18px;
   }
   
+  /* Brand colors for social media icons */
+  .footer-social a:nth-child(1) i {
+    color: #1877F2; /* Facebook blue */
+  }
+  
+  .footer-social a:nth-child(2) i {
+    color: #FF0000; /* YouTube red */
+  }
+  
+  .footer-social a:nth-child(3) i {
+    background: -webkit-linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
   .footer-social a:hover {
-    color: #007bff;
+    opacity: 0.8;
   }
   

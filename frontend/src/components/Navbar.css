@@ -98,7 +98,8 @@
   color: #FFFDF8;
 }
 
-.nav-link[href="/contact"] {
+.nav-link[href="/contact"], 
+.nav-link[href="#contact"] {
   position: relative;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
@@ -115,6 +116,103 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.navbar-search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-search-overlay {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -250px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+}
+
+.navbar-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  padding: 0 10px;
+  margin-right: 10px;
+}
+
+#navbar-search-input {
+  background-color: transparent;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 10px;
+  font-size: 14px;
+  color: #FFFFFF;
+  width: 200px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#navbar-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar-search-close {
+  background: none;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+}
+
+.navbar-search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.navbar-search-result {
+  padding: 12px 15px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.navbar-search-result:last-child {
+  border-bottom: none;
+}
+
+.navbar-search-result:hover {
+  background-color: rgba(153, 121, 80, 0.1);
+}
+
+.navbar-search-result h4 {
+  margin: 0;
+  margin-bottom: 4px;
+  color: #6A3D2A;
+  font-size: 14px;
+}
+
+.navbar-search-result p {
+  margin: 0;
+  color: #747474;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @media screen and (max-width: 1440px) {
@@ -138,6 +236,7 @@
   }
 }
 
+/* Media queries for search responsiveness */
 @media screen and (max-width: 768px) {
   .navbar {
     height: auto;
@@ -165,5 +264,23 @@
     position: static;
     transform: none;
     margin: 1rem 0;
+  }
+  
+  .navbar-search-overlay {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    transform: none;
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  .navbar-search-wrapper {
+    width: 100%;
+  }
+  
+  #navbar-search-input {
+    width: 100%;
   }
 } 

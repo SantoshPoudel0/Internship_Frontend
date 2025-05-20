@@ -1,13 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Navbar.css';
+
+// Sample search data - in a real application this would come from a database or API
+const searchData = [
+  { title: 'Home', path: '/', content: 'From Crop To Cup. Himalayan Java Coffee Beans are grown locally.' },
+  { title: 'About', path: '/#outlets', content: 'Learn about Himalayan Java, our history and our outlets across Nepal.' },
+  { title: 'Services', path: '/#services', content: 'We offer high-quality coffee, comfortable ambiance.' },
+  { title: 'Menu', path: '/#menu', content: 'Espresso, Cappuccino, Latte, Americano, Macchiato, Mocha and more.' },
+  { title: 'Training', path: '/trainings', content: 'Barista basics, latte art, coffee tasting, brewing methods.' },
+  { title: 'Contact', path: '/#contact', content: 'Tridevi Marg, Thamel, Kathmandu, Nepal.' }
+];
 
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [showSearch, setShowSearch] = useState(false);
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+  const searchRef = useRef(null);
+  const searchIconRef = useRef(null);
   
   // Check if current page is training page
   const isTrainingPage = location.pathname === '/trainings';
+  
+  // Handle clicks outside of search area
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Close search if the click is outside search area and search icon
+      if (
+        showSearch && 
+        searchRef.current && 
+        !searchRef.current.contains(event.target) && 
+        searchIconRef.current && 
+        !searchIconRef.current.contains(event.target)
+      ) {
+        setShowSearch(false);
+        setQuery('');
+        setResults([]);
+      }
+    };
+
+    // Add event listener when search is open
+    if (showSearch) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    
+    // Cleanup event listener
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showSearch]);
   
   const handleServicesClick = (e) => {
     e.preventDefault();
@@ -41,6 +84,67 @@ function Navbar() {
     }
   };
   
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    
+    // Check if we're already on the home page
+    if (window.location.pathname === '/') {
+      // If on home page, just scroll to the contact section smoothly
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If on another page, navigate to home page with contact hash
+      navigate('/#contact');
+    }
+  };
+  
+  const toggleSearch = (e) => {
+    e.preventDefault();
+    setShowSearch(!showSearch);
+    if (!showSearch) {
+      // Focus search input when search bar appears
+      setTimeout(() => {
+        const searchInput = document.getElementById('navbar-search-input');
+        if (searchInput) {
+          searchInput.focus();
+        }
+      }, 100);
+    }
+    setQuery('');
+    setResults([]);
+  };
+  
+  const handleSearchChange = (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    setQuery(searchTerm);
+    
+    if (searchTerm.length < 2) {
+      setResults([]);
+      return;
+    }
+    
+    // Filter search data based on query
+    const filteredResults = searchData.filter(item => 
+      item.title.toLowerCase().includes(searchTerm) || 
+      item.content.toLowerCase().includes(searchTerm)
+    ).slice(0, 4); // Limit to 4 results
+    
+    setResults(filteredResults);
+  };
+  
+  const handleResultClick = (path) => {
+    navigate(path);
+    setShowSearch(false);
+    setQuery('');
+    setResults([]);
+  };
+  
+  const handleSearchBlur = () => {
+    // No longer needed as we're using the click outside handler
+  };
+  
   const handleTrainingsClick = () => {
     console.log('Trainings link clicked, navigating to /trainings');
   };
@@ -65,17 +169,54 @@ function Navbar() {
           <Link to="/trainings" className="nav-link" onClick={handleTrainingsClick}>
             Trainings
           </Link>
-          <Link to="/contact" className="nav-link">
+          <a href="#contact" className="nav-link" onClick={handleContactClick}>
             Contact
-          </Link>
-          <Link to="/search" className="search-icon">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10.5 18C14.6421 18 18 14.6421 18 10.5C18 6.35786 14.6421 3 10.5 3C6.35786 3 3 6.35786 3 10.5C3 14.6421 6.35786 18 10.5 18Z" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round"/>
-              <path d="M21 21L16 16" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round"/>
-            </svg>
-          </Link>
+          </a>
+          <div className="navbar-search-container">
+            <a href="#" className="search-icon" onClick={toggleSearch} ref={searchIconRef}>
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.5 18C14.6421 18 18 14.6421 18 10.5C18 6.35786 14.6421 3 10.5 3C6.35786 3 3 6.35786 3 10.5C3 14.6421 6.35786 18 10.5 18Z" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round"/>
+                <path d="M21 21L16 16" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
+      
+      {showSearch && (
+        <div className="navbar-search-overlay" ref={searchRef}>
+          <div className="navbar-search-wrapper">
+            <input
+              id="navbar-search-input"
+              type="text"
+              placeholder="Search..."
+              value={query}
+              onChange={handleSearchChange}
+            />
+            <button className="navbar-search-close" onClick={toggleSearch}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M6 6L18 18" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+            
+            {results.length > 0 && (
+              <div className="navbar-search-results">
+                {results.map((result, index) => (
+                  <div 
+                    key={index} 
+                    className="navbar-search-result"
+                    onClick={() => handleResultClick(result.path)}
+                  >
+                    <h4>{result.title}</h4>
+                    <p>{result.content}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

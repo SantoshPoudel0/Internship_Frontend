@@ -5,6 +5,24 @@
   box-sizing: border-box;
   background-color: #fff;
   min-height: 1200px;
+  /* Optimize for immediate rendering */
+  contain: layout style;
+}
+
+/* Make navbar links visible on training page */
+body:has(.training-section) .nav-link[href="/trainings"],
+body:has(.training-section) .nav-link[href="/contact"] {
+  color: #747474 !important;
+}
+
+/* Ensure About and Services links remain the same on training page */
+.navbar.training-page .nav-link[href="#outlets"],
+.navbar.training-page .nav-link[href="#services"] {
+  color: #747474 !important;
+}
+
+body:has(.training-section) .search-icon path {
+  stroke: #747474 !important;
 }
 
 .training-container {
@@ -39,6 +57,7 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 50px;
   margin-bottom: 80px;
+  contain: layout style;
 }
 
 .training-item {
@@ -49,6 +68,7 @@
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  contain: content;
 }
 
 .training-item:hover {
@@ -58,6 +78,9 @@
 .training-image {
   height: 250px;
   overflow: hidden;
+  transform: translateZ(0);
+  will-change: transform;
+  background-color: #F6EDE0; /* Placeholder color that matches the container */
 }
 
 .training-image img {
@@ -65,6 +88,9 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
+  /* Ensure immediate rendering of images */
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .training-item:hover .training-image img {
@@ -125,6 +151,7 @@
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  contain: content;
 }
 
 .certification-content {
@@ -149,12 +176,17 @@
 .certification-image {
   flex: 1;
   height: 350px;
+  transform: translateZ(0);
+  background-color: #F6EDE0; /* Placeholder color that matches the container */
 }
 
 .certification-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Ensure immediate rendering of images */
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 @media screen and (max-width: 992px) {
@@ -187,4 +219,4 @@
   .training-content h3 {
     font-size: 20px;
   }
-} 
+}

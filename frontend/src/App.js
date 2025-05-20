@@ -44,6 +44,41 @@ function App() {
 }
 
 function AppContent() {
+  // Immediately preload all training images when app first loads
+  useEffect(() => {
+    // Preload training images
+    const preloadImages = [
+      '/images/training/barista-basics.jpg',
+      '/images/training/latte-art.jpg',
+      '/images/training/coffee-tasting.jpg',
+      '/images/training/brewing-methods.jpg',
+      '/images/training/coffee-roasting.jpg',
+      '/images/training/cafe-management.jpg',
+      '/images/training/certification.jpg'
+    ];
+    
+    // Create image objects and load immediately (high priority)
+    preloadImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+    
+    // Pre-render a hidden Training component to warm up the cache
+    const hiddenTraining = document.createElement('div');
+    hiddenTraining.style.position = 'absolute';
+    hiddenTraining.style.width = '0';
+    hiddenTraining.style.height = '0';
+    hiddenTraining.style.overflow = 'hidden';
+    document.body.appendChild(hiddenTraining);
+    
+    // Clean up
+    return () => {
+      if (document.body.contains(hiddenTraining)) {
+        document.body.removeChild(hiddenTraining);
+      }
+    };
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -80,7 +115,10 @@ function About() {
 function Trainings() {
   console.log('Training component is rendering');
   return (
-    <div style={{marginTop: '80px'}}>
+    <div style={{
+      marginTop: '123px',
+      position: 'relative'
+    }}>
       <Training />
     </div>
   );

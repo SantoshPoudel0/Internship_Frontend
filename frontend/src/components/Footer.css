@@ -1,0 +1,62 @@
+.footer {
+    background-color: #fffdf8;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    color: #000;
+    position: relative;
+    z-index: 100;
+    margin-top: 3500px; /* Further reduced to bring footer closer to reviews section */
+  }
+  
+  .footer-sections {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  
+  .footer-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-nav li {
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .footer-contact h4 {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .footer-contact p {
+    margin: 5px 0;
+  }
+  
+  .footer-map iframe {
+    border-radius: 8px;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 14px;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+  }
+  
+  .footer-social a {
+    margin: 0 10px;
+    color: #000;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .footer-social a:hover {
+    color: #007bff;
+  }
+  

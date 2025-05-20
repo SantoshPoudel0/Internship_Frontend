@@ -9,7 +9,23 @@
   position: absolute;
   top: 40px;
   left: 488px;
-  z-index: 999;
+  z-index: 9999;
+}
+
+/* Special styling for navbar on training page */
+.navbar.training-page .nav-link[href="/trainings"],
+.navbar.training-page .nav-link[href="/contact"] {
+  color: #747474 !important;
+}
+
+/* Ensure About and Services links remain the same on training page */
+.navbar.training-page .nav-link[href="#outlets"],
+.navbar.training-page .nav-link[href="#services"] {
+  color: #747474 !important;
+}
+
+.navbar.training-page .search-icon path {
+  stroke: #747474 !important;
 }
 
 .navbar-container {

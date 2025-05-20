@@ -1,9 +1,13 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
 function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Check if current page is training page
+  const isTrainingPage = location.pathname === '/trainings';
   
   const handleServicesClick = (e) => {
     e.preventDefault();
@@ -42,7 +46,7 @@ function Navbar() {
   };
   
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${isTrainingPage ? 'training-page' : ''}`}>
       <div className="navbar-container">
         <div className="nav-left">
           <a href="#outlets" className="nav-link" onClick={handleAboutClick}>

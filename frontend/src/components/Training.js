@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Training.css';
 
 function Training() {
+  // Force immediate loading of all training images
+  useEffect(() => {
+    // Get all image elements
+    const images = document.querySelectorAll('.training-image img, .certification-image img');
+    
+    // Set high priority for all images
+    images.forEach(img => {
+      if (img.loading === 'lazy') {
+        img.loading = 'eager';
+      }
+      if ('fetchPriority' in img) {
+        img.fetchPriority = 'high';
+      }
+    });
+  }, []);
+
   return (
     <section id="training" className="training-section">
       <div className="training-container">
@@ -17,7 +33,7 @@ function Training() {
         <div className="training-grid">
           <div className="training-item">
             <div className="training-image">
-              <img src="/images/training/barista-basics.jpg" alt="Barista Basics" />
+              <img src="/images/training/barista-basics.jpg" alt="Barista Basics" loading="eager" fetchpriority="high" />
             </div>
             <div className="training-content">
               <h3>Barista Basics</h3>
@@ -32,7 +48,7 @@ function Training() {
           
           <div className="training-item">
             <div className="training-image">
-              <img src="/images/training/latte-art.jpg" alt="Advanced Latte Art" />
+              <img src="/images/training/latte-art.jpg" alt="Advanced Latte Art" loading="eager" fetchpriority="high" />
             </div>
             <div className="training-content">
               <h3>Advanced Latte Art</h3>
@@ -47,7 +63,7 @@ function Training() {
           
           <div className="training-item">
             <div className="training-image">
-              <img src="/images/training/coffee-tasting.jpg" alt="Coffee Tasting & Appreciation" />
+              <img src="/images/training/coffee-tasting.jpg" alt="Coffee Tasting & Appreciation" loading="eager" fetchpriority="high" />
             </div>
             <div className="training-content">
               <h3>Coffee Tasting & Appreciation</h3>
@@ -62,7 +78,7 @@ function Training() {
           
           <div className="training-item">
             <div className="training-image">
-              <img src="/images/training/brewing-methods.jpg" alt="Alternative Brewing Methods" />
+              <img src="/images/training/brewing-methods.jpg" alt="Alternative Brewing Methods" loading="eager" fetchpriority="high" />
             </div>
             <div className="training-content">
               <h3>Alternative Brewing Methods</h3>
@@ -77,7 +93,7 @@ function Training() {
           
           <div className="training-item">
             <div className="training-image">
-              <img src="/images/training/coffee-roasting.jpg" alt="Coffee Roasting Workshop" />
+              <img src="/images/training/coffee-roasting.jpg" alt="Coffee Roasting Workshop" loading="eager" fetchpriority="high" />
             </div>
             <div className="training-content">
               <h3>Coffee Roasting Workshop</h3>
@@ -92,7 +108,7 @@ function Training() {
           
           <div className="training-item">
             <div className="training-image">
-              <img src="/images/training/cafe-management.jpg" alt="Café Management Essentials" />
+              <img src="/images/training/cafe-management.jpg" alt="Café Management Essentials" loading="eager" fetchpriority="high" />
             </div>
             <div className="training-content">
               <h3>Café Management Essentials</h3>
@@ -113,7 +129,7 @@ function Training() {
             <p>Group discounts are available for teams of 3 or more people. Contact us for custom training programs for your café or restaurant.</p>
           </div>
           <div className="certification-image">
-            <img src="/images/training/certification.jpg" alt="Coffee Certification" />
+            <img src="/images/training/certification.jpg" alt="Coffee Certification" loading="eager" fetchpriority="high" />
           </div>
         </div>
       </div>

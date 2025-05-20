@@ -3,6 +3,7 @@ import Services from './Services';
 import Outlets from './Outlets';
 import Menu from './Menu';
 import Reviews from './Reviews';
+import Footer from './Footer';
 import './Home.css';
 
 function Home() {
@@ -75,6 +76,9 @@ function Home() {
       
       {/* Reviews Section */}
       <Reviews />
+      
+      {/* Footer Section */}
+      <Footer />
     </div>
   );
 }

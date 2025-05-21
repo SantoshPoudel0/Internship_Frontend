@@ -1,0 +1,451 @@
+.training-details-page {
+  padding: 160px 0 80px;
+  background-color: #fff;
+  position: relative;
+}
+
+/* Hero section with background */
+.training-hero {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  background-color: #fff;
+  z-index: 0;
+  border-bottom: 1px solid #F6EDE0;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+
+.error-container {
+  padding: 50px 0;
+}
+
+.back-link {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 30px;
+  margin-left: 18px;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  background-color: #F6EDE0;
+  color: #8B4513;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(139, 69, 19, 0.15);
+  text-decoration: none;
+}
+
+.back-btn:hover {
+  background-color: #8B4513;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(139, 69, 19, 0.25);
+}
+
+.back-btn .arrow {
+  margin-right: 6px;
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.back-btn:hover .arrow {
+  transform: translateX(-3px);
+}
+
+.back-btn-simple {
+  color: #534435 !important;
+  background: none;
+  border: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 0;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.back-btn-simple:hover {
+  color: #3d3227 !important;
+  text-decoration: underline;
+}
+
+.back-btn-accent {
+  display: inline-block;
+  color: #534435 !important;
+  background: none;
+  border: 1.5px solid #534435;
+  border-radius: 18px;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 4px 18px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  box-shadow: none;
+  line-height: 1.2;
+}
+
+.back-btn-accent:hover {
+  background: #534435;
+  color: #fff !important;
+}
+
+.training-main-container {
+  position: relative;
+  z-index: 1;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.08);
+  padding: 40px;
+  margin-bottom: 60px;
+}
+
+.training-header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  gap: 20px;
+}
+
+.training-title-area {
+  flex: 1;
+  max-width: 650px;
+}
+
+.training-title-area h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #8B4513;
+  line-height: 1.2;
+}
+
+.training-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.duration-badge, .price-tag {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.duration-badge {
+  background-color: #F6EDE0;
+  color: #8B4513;
+}
+
+.price-tag {
+  background-color: #8B4513;
+  color: #fff;
+}
+
+.discount {
+  margin-left: 5px;
+  color: #F6EDE0;
+  font-weight: 700;
+}
+
+.training-image-area {
+  width: 210px;
+  height: 210px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: #f8f9fa;
+  border: 5px solid #fff;
+}
+
+.training-featured-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.training-content-section {
+  margin-top: 30px;
+}
+
+.content-box {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+.content-box:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.description-box h2, .training-highlights h2, .booking-box h2 {
+  font-size: 24px;
+  margin-bottom: 25px;
+  color: #000 !important;
+  border-bottom: 2px solid #F6EDE0;
+  padding-bottom: 12px;
+  position: relative;
+}
+
+.description-box h2:after, .training-highlights h2:after, .booking-box h2:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 60px;
+  height: 2px;
+  background-color: #8B4513;
+}
+
+.description-content {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #444;
+}
+
+.highlights-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.highlights-list li {
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #444;
+  position: relative;
+  padding-left: 30px;
+}
+
+.highlights-list li:before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #8B4513;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.booking-box {
+  background-color: #fff;
+  border: 2px solid #F6EDE0;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.booking-box h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #8B4513;
+  text-align: center;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.booking-box h2:after {
+  display: none;
+}
+
+.booking-box:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 8px;
+  background-color: #8B4513;
+}
+
+/* Form styling improvements */
+.form-control {
+  border-radius: 8px;
+  padding: 10px 15px;
+  border: 1px solid #e0e0e0;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.form-control:focus {
+  border-color: #8B4513;
+  box-shadow: 0 0 0 0.25rem rgba(139, 69, 19, 0.15);
+  background-color: #fff;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.booking-submit-btn {
+  background-color: #8B4513;
+  border-color: #8B4513;
+  padding: 10px 16px;
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.booking-submit-btn:hover,
+.booking-submit-btn:focus,
+.booking-submit-btn:active {
+  background-color: #6B3100;
+  border-color: #6B3100;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(139, 69, 19, 0.2);
+}
+
+/* Booking success styling */
+.alert-success {
+  background-color: #F6EDE0;
+  border-color: #E6D9C8;
+  color: #8B4513;
+}
+
+.alert-success .alert-heading {
+  color: #8B4513;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.contact-box {
+  background-color: #f8f9fa;
+  border-left: 5px solid #8B4513;
+}
+
+.contact-box h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #8B4513;
+}
+
+.contact-info p {
+  margin-bottom: 12px;
+}
+
+.contact-info p strong {
+  color: #8B4513;
+}
+
+/* Instructor section styling */
+.instructor-section {
+  background-color: #f8f9fa;
+}
+
+.instructor-profile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.instructor-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #8B4513;
+}
+
+.instructor-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.instructor-info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.instructor-info h3 {
+  font-size: 20px;
+  margin-bottom: 5px;
+  color: #8B4513;
+}
+
+.instructor-title {
+  font-size: 15px;
+  color: #8B4513;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.instructor-bio {
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 992px) {
+  .training-details-page {
+    padding-top: 140px;
+  }
+  
+  .training-title-area h1 {
+    font-size: 28px;
+  }
+  
+  .training-hero {
+    height: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .training-header-section {
+    flex-direction: column;
+  }
+  
+  .training-image-area {
+    order: -1;
+  }
+  
+  .training-details-page {
+    padding-top: 120px;
+  }
+  
+  .training-hero {
+    height: 200px;
+  }
+  
+  .training-main-container {
+    padding: 20px;
+  }
+}
+
+.training-heading {
+  color: #000 !important;
+} 

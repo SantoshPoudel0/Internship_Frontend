@@ -5,21 +5,46 @@ function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    subject: 'Website Contact Form',
     message: ''
   });
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setSubmitStatus('success');
-    setFormData({ name: '', email: '', message: '' });
-    setTimeout(() => setSubmitStatus(null), 3000);
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to send message');
+      }
+      
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', subject: 'Website Contact Form', message: '' });
+      setTimeout(() => setSubmitStatus(null), 3000);
+    } catch (err) {
+      setError(err.message || 'Something went wrong. Please try again.');
+      setSubmitStatus('error');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -77,11 +102,19 @@ function Contact() {
               </div>
             </div>
 
-            <button type="submit" className="submit-button">Send Message</button>
+            <button type="submit" className="submit-button" disabled={loading}>
+              {loading ? 'Sending...' : 'Send Message'}
+            </button>
             
             {submitStatus === 'success' && (
               <div className="success-message">
-                Message sent!
+                Message sent! We'll get back to you soon.
+              </div>
+            )}
+            
+            {submitStatus === 'error' && (
+              <div className="error-message">
+                {error}
               </div>
             )}
           </form>

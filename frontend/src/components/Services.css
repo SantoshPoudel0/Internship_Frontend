@@ -1,6 +1,6 @@
 .services-section {
   width: 1183px;
-  height: 500px;
+  height: 520px;
   position: absolute;
   top: 850px;
   left: 100px;
@@ -75,7 +75,7 @@
 
 .services-grid {
   width: 625px;
-  height: 400px;
+  height: 420px;
   position: absolute;
   top: 0;
   left: 530px;
@@ -91,6 +91,7 @@
   align-items: center;
   justify-content: flex-start;
   text-align: center;
+  padding-top: 5px;
 }
 
 .service-content {
@@ -104,7 +105,8 @@
 .service-icon {
   width: 70px;
   height: 70px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  margin-top: -10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,14 +121,15 @@
 .service-title {
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   color: #333;
   text-align: center;
 }
 
 .service-text {
   width: 281px;
-  height: 84px;
+  height: auto;
+  min-height: 84px;
   font-family: Poppins;
   font-weight: 400;
   font-size: 16px;
@@ -135,6 +138,9 @@
   color: #666;
   text-align: center;
   margin: 0 auto;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .coffee-beans-text {
@@ -166,9 +172,8 @@
 
 .equipment-text {
   width: 277px;
-  height: 94px;
-  top: 1133px;
-  left: 711px;
+  height: auto;
+  min-height: 94px;
   font-family: Poppins;
   font-weight: 400;
   font-size: 16px;

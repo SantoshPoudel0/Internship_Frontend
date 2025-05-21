@@ -50,90 +50,104 @@ body:has(.training-section) .search-icon path {
   color: #666;
 }
 
-.training-grid {
+/* Modern card-based training grid */
+.modern-training-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   margin-bottom: 60px;
 }
 
-.training-item {
+.modern-training-card {
   display: flex;
   flex-direction: column;
-  background-color: #F6EDE0;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 20px;
+  height: 100%;
+  background-color: #F6EDE0;
 }
 
-.training-image {
-  height: 200px;
-  background-size: cover;
-  background-position: center;
+.modern-training-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.modern-training-card.expanded {
+  grid-column: 1 / -1;
+  margin-bottom: 20px;
+}
+
+.training-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+  margin-bottom: 15px;
   position: relative;
 }
 
-.training-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.2));
+.training-logo {
+  max-width: 100%;
+  max-height: 80px;
+  object-fit: contain;
 }
 
-.training-content {
-  padding: 20px;
-  flex: 1;
+.modern-training-content {
   display: flex;
   flex-direction: column;
-}
-
-.training-content h3 {
-  font-size: 20px;
-  font-weight: 600;
-  color: #000;
-  margin: 0 0 10px 0;
-}
-
-.training-price {
-  font-size: 17px;
-  font-weight: 600;
-  color: #6f7789;
-  margin: 0 0 5px 0;
-}
-
-.training-duration {
-  font-size: 15px;
-  color: #666;
-  margin: 0 0 10px 0;
-}
-
-.training-text {
-  font-size: 15px;
-  line-height: 1.5;
-  color: #666;
-  margin: 0 0 15px 0;
   flex: 1;
 }
 
-.enroll-button {
-  background-color: #8B4513;
-  color: white;
-  border: none;
-  padding: 10px 20px;
+.modern-training-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0B6B4A;
+  margin: 0 0 10px 0;
+  line-height: 1.3;
+}
+
+.modern-training-duration {
+  font-size: 15px;
+  color: #666;
+  margin: 0 0 20px 0;
+}
+
+.learn-more-button {
+  display: inline-block;
+  background-color: #F6F6F6;
+  color: #333;
+  text-decoration: none;
+  padding: 8px 16px;
   font-size: 15px;
   font-weight: 500;
-  border-radius: 4px;
+  border-radius: 30px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
+  margin-top: auto;
   align-self: flex-start;
+  border: 1px solid #E0E0E0;
 }
 
-.enroll-button:hover {
-  background-color: #6B3100;
+.learn-more-button:hover {
+  background-color: #8B4513;
+  color: white;
+  border-color: #8B4513;
 }
 
+.arrow {
+  display: inline-block;
+  margin-left: 5px;
+  transition: transform 0.2s ease;
+}
+
+.learn-more-button:hover .arrow {
+  transform: translateX(3px);
+}
+
+/* Original styles for the certification section */
 .certification-section {
   display: flex;
   align-items: stretch;
@@ -189,8 +203,15 @@ body:has(.training-section) .search-icon path {
   background-position: center;
 }
 
-@media screen and (max-width: 992px) {
-  .training-grid {
+/* Responsive styles */
+@media screen and (max-width: 1200px) {
+  .modern-training-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .modern-training-grid {
     grid-template-columns: 1fr;
   }
   
@@ -215,8 +236,112 @@ body:has(.training-section) .search-icon path {
   .training-description {
     font-size: 16px;
   }
-  
-  .training-content h3 {
-    font-size: 18px;
-  }
+}
+
+.modern-training-level {
+  font-size: 14px;
+  font-weight: 500;
+  color: #0B6B4A;
+  margin: 0 0 10px 0;
+  padding: 2px 8px;
+  background-color: rgba(11, 107, 74, 0.1);
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  width: 100%;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Training detail container styles */
+.training-detail-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.training-detail-image {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.training-detail-image img {
+  max-width: 100%;
+  height: auto;
+  max-height: 250px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.training-detail-info {
+  flex: 2;
+  min-width: 300px;
+}
+
+.training-detail-info h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #0B6B4A;
+}
+
+.training-description-full {
+  margin-top: 20px;
+}
+
+.training-description-full h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.discount-text {
+  color: #dc3545;
+}
+
+/* Booking form styles */
+.booking-form-container {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.booking-form-container h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #0B6B4A;
+}
+
+.booking-submit-btn {
+  background-color: #8B4513;
+  border-color: #8B4513;
+}
+
+.booking-submit-btn:hover, 
+.booking-submit-btn:focus, 
+.booking-submit-btn:active {
+  background-color: #6B3100;
+  border-color: #6B3100;
+}
+
+.training-details-expanded {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+  width: 100%;
 }

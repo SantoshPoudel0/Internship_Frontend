@@ -1,95 +1,203 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Training.css';
-
-// Training courses data with images that match the course titles
-const trainingCourses = [
-  {
-    id: 1,
-    title: 'Barista Basics',
-    price: 'RS 2,500',
-    duration: '2 Days',
-    description: 'Master espresso extraction, milk texturing techniques, and basic drink preparation. Ideal for beginners and home enthusiasts.',
-    image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
-  },
-  {
-    id: 2,
-    title: 'Advanced Latte Art',
-    price: 'RS 3,200',
-    duration: '3 Days',
-    description: 'Create intricate designs including rosettas, hearts, tulips, and swans. Learn pouring techniques from award-winning baristas.',
-    image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
-  },
-  {
-    id: 3,
-    title: 'Coffee Tasting',
-    price: 'RS 1,800',
-    duration: '1 Day',
-    description: 'Train your palate to identify flavor notes, acidity, body, and aroma. Includes cupping sessions with single-origin beans from around the world.',
-    image: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
-  },
-  {
-    id: 4,
-    title: 'Brewing Methods',
-    price: 'RS 2,200',
-    duration: '2 Days',
-    description: 'Compare pour-over, AeroPress, French press, and siphon brewing. Learn optimal grind sizes, water temperatures, and brewing ratios.',
-    image: 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
-  },
-  {
-    id: 5,
-    title: 'Coffee Roasting Workshop',
-    price: 'RS 4,500',
-    duration: '3 Days',
-    description: 'Understand first crack, development time, and roast profiles. Practice on commercial drum roasters with specialty green beans.',
-    image: 'https://images.unsplash.com/photo-1515283709260-ee29296f1534?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
-  },
-  {
-    id: 6,
-    title: 'Café Management',
-    price: 'RS 5,800',
-    duration: '5 Days',
-    description: 'Learn inventory management, staff training, equipment maintenance, pricing strategies, and customer experience optimization.',
-    image: 'https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
-  }
-];
+import axios from 'axios';
+import { API_URL } from '../utils/constants';
+import { Button, Form, Row, Col, Alert, Spinner } from 'react-bootstrap';
 
 function Training() {
+  const [trainings, setTrainings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+  // Track which training is expanded
+  const [expandedTrainingId, setExpandedTrainingId] = useState(null);
+  const [formSubmitting, setFormSubmitting] = useState(false);
+  const [formSuccess, setFormSuccess] = useState(false);
+  const [formError, setFormError] = useState(null);
+  const [bookingForm, setBookingForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  
+  // Fallback data in case API fails
+  const fallbackTrainings = [
+    {
+      _id: "1",
+      title: 'MERN Stack Training in Nepal',
+      duration: '3 months',
+      description: 'Learn MongoDB, Express.js, React.js, and Node.js stack from experienced developers.',
+      level: 'Intermediate'
+    },
+    {
+      _id: "2",
+      title: 'Python with Django Training in Nepal',
+      duration: '2.5 months',
+      description: 'Master Python programming and Django web framework to build robust web applications.',
+      level: 'Beginner'
+    },
+    {
+      _id: "3",
+      title: 'Digital Marketing Training in Nepal',
+      duration: '2.5 months',
+      description: 'Learn SEO, social media marketing, content marketing, and online advertising strategies.',
+      level: 'All Levels'
+    },
+    {
+      _id: "4",
+      title: 'Quality Assurance Training in Nepal',
+      duration: '2.5 months',
+      description: 'Learn software testing methodologies, automation tools, and quality assurance best practices.',
+      level: 'Intermediate'
+    }
+  ];
+
+  useEffect(() => {
+    const fetchTrainings = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/trainings`);
+        setTrainings(response.data);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching trainings:', err);
+        // Use fallback data if API fails
+        setTrainings(fallbackTrainings);
+        setLoading(false);
+      }
+    };
+    
+    fetchTrainings();
+  }, []);
+
+  // Function to get placeholder image based on training title
+  const getPlaceholderImage = (title, imageUrl) => {
+    if (imageUrl && imageUrl !== 'default-training.jpg') {
+      return `${API_URL}/uploads/${imageUrl}`;
+    }
+    
+    if (title.includes('MERN')) {
+      return 'https://cdn.iconscout.com/icon/free/png-256/free-react-1-282599.png';
+    } else if (title.includes('Python')) {
+      return 'https://cdn.iconscout.com/icon/free/png-256/free-python-3521655-2945099.png';
+    } else if (title.includes('Digital Marketing')) {
+      return 'https://cdn.iconscout.com/icon/free/png-256/free-marketing-1855075-1574623.png';
+    } else if (title.includes('Quality Assurance')) {
+      return 'https://cdn.iconscout.com/icon/free/png-256/free-qa-1-283367.png';
+    }
+    return 'https://placehold.co/200x100?text=Training';
+  };
+  
+  // Handle toggling the expanded training
+  const toggleTrainingDetails = (trainingId) => {
+    if (expandedTrainingId === trainingId) {
+      setExpandedTrainingId(null); // Collapse if already expanded
+    } else {
+      setExpandedTrainingId(trainingId); // Expand this training
+      // Reset form state when opening a new training detail
+      setFormSuccess(false);
+      setFormError(null);
+      setBookingForm({
+        name: '',
+        email: '',
+        phone: '',
+        message: ''
+      });
+    }
+  };
+  
+  // Handle booking form input changes
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setBookingForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+  
+  // Handle booking form submission
+  const handleSubmitBooking = async (e, trainingId, trainingTitle) => {
+    e.preventDefault();
+    setFormSubmitting(true);
+    setFormError(null);
+    
+    try {
+      // Submit booking to the backend
+      await axios.post(`${API_URL}/api/bookings`, {
+        ...bookingForm,
+        trainingId: trainingId,
+        trainingTitle: trainingTitle
+      });
+      
+      setFormSuccess(true);
+      setBookingForm({
+        name: '',
+        email: '',
+        phone: '',
+        message: ''
+      });
+    } catch (err) {
+      setFormError('Failed to submit booking. Please try again.');
+      console.error('Booking submission error:', err);
+    } finally {
+      setFormSubmitting(false);
+    }
+  };
+
   return (
     <section id="training" className="training-section">
       <div className="training-container">
         <div className="training-header">
-          <h1>Coffee Training Academy</h1>
+          <h1>Our Training Programs</h1>
           <p className="training-description">
-            Join our professional coffee training sessions to master the art of brewing, 
-            latte art, and coffee appreciation. Our courses are taught by certified coffee experts.
+            Enhance your skills with our professional training programs taught by industry experts.
+            We offer hands-on experience and practical knowledge for various tech and business domains.
           </p>
         </div>
         
-        <div className="training-grid">
-          {trainingCourses.map(course => (
-            <div key={course.id} className="training-item">
-              <div className="training-image" style={{ backgroundImage: `url(${course.image})` }}>
-                <div className="training-overlay"></div>
+        {loading ? (
+          <div className="loading-spinner">Loading trainings...</div>
+        ) : error ? (
+          <div className="error-message">{error}</div>
+        ) : (
+          <div className="modern-training-grid">
+            {trainings.map(training => (
+              <div key={training._id} className="modern-training-card" style={{ backgroundColor: '#F6EDE0' }}>
+                <div className="training-logo-container">
+                  <img 
+                    src={getPlaceholderImage(training.title, training.imageUrl)} 
+                    alt={`${training.title} logo`} 
+                    className="training-logo" 
+                  />
+                </div>
+                
+                <div className="modern-training-content">
+                  <h3 className="modern-training-title">{training.title}</h3>
+                  <p className="modern-training-duration">{training.duration}</p>
+                  
+                  <Link 
+                    to={`/trainings/${training._id}`}
+                    className="learn-more-button"
+                  >
+                    Learn More <span className="arrow">→</span>
+                  </Link>
+                </div>
               </div>
-              <div className="training-content">
-                <h3>{course.title}</h3>
-                <p className="training-price">{course.price}</p>
-                <p className="training-duration">Duration: {course.duration}</p>
-                <p className="training-text">{course.description}</p>
-                <button className="enroll-button">Enroll Now</button>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
         
         <div className="certification-section">
           <div className="certification-content">
             <h2>Professional Certification</h2>
-            <p>All our training courses come with SCA (Specialty Coffee Association) recognized certification. Our trainers have competed in national and international barista championships.</p>
-            <p>Group discounts of 15% are available for teams of 3 or more people. Custom corporate training packages available.</p>
+            <p>All our training courses come with industry-recognized certification. 
+            Our trainers have years of experience working with top companies in their respective fields.</p>
+            <p>Group discounts of 15% are available for teams of 3 or more people. 
+            Custom corporate training packages available upon request.</p>
             <button className="contact-button">Contact Us</button>
           </div>
-          <div className="certification-image" style={{ backgroundImage: `url(/images/training/sample_certificate.jpg)` }}>
+          <div className="certification-image" style={{ backgroundImage: `url(https://placehold.co/800x400?text=Certificate)` }}>
           </div>
         </div>
       </div>

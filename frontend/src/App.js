@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Training from './components/Training';
+import TrainingDetails from './components/TrainingDetails';
 import Contact from './components/Contact';
 import { preloadCriticalImages } from './utils/preloadImages';
 import './App.css';
@@ -73,6 +74,7 @@ function AppContent() {
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<ServiceRedirect />} />
         <Route path="/trainings" element={<Trainings />} />
+        <Route path="/trainings/:id" element={<TrainingDetailsPage />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </>
@@ -100,6 +102,14 @@ function Trainings() {
   return (
     <div className="training-page-container">
       <Training />
+    </div>
+  );
+}
+
+function TrainingDetailsPage() {
+  return (
+    <div className="training-details-page-container">
+      <TrainingDetails />
     </div>
   );
 }

@@ -22,22 +22,24 @@
   width: 533px;
   height: 386px;
   position: absolute;
-  top: 235px;
-  left: 147px;
+  top: 220px;
+  left: 100px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .left-content h1 {
   font-size: 48px;
   font-weight: 700;
   font-family: 'Poppins', sans-serif;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
   color: #6A3D2A;
   line-height: 100%;
   letter-spacing: 0%;
   text-transform: capitalize;
+  text-align: left;
 }
 
 .left-content p {
@@ -49,6 +51,7 @@
   line-height: 32px;
   letter-spacing: 0%;
   max-width: 100%;
+  text-align: left;
 }
 
 .subtitle {
@@ -62,6 +65,9 @@
 
 .cta-buttons {
   margin-bottom: 2rem;
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .btn-primary {
@@ -87,12 +93,21 @@
 .social-icons-container {
   display: flex;
   gap: 1.5rem;
+  justify-content: flex-start;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .social-icon {
   color: #000000;
   font-size: 1.2rem;
   transition: color 0.3s ease;
+  margin-left: 0;
+}
+
+.social-icon:first-child {
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .social-icon:hover {
@@ -158,7 +173,7 @@
 
 @media screen and (max-width: 1440px) {
   .left-content {
-    left: 10%;
+    left: 100px;
   }
   
   .right-content {

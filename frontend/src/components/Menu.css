@@ -71,17 +71,25 @@
   gap: 40px 60px;
   position: absolute;
   width: 1200px;
-  height: 920px;
+  height: auto;
+  min-height: 300px;
   top: 2392px;
   left: 50%;
   transform: translateX(-50%);
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   background-color: #F6EDE0;
   border-radius: 10px;
   padding: 40px 80px;
   box-sizing: border-box;
   margin: 0 auto;
+}
+
+/* Single item centered layout */
+.menu-grid.single-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .menu-item {
@@ -90,10 +98,11 @@
   flex-direction: row;
   position: relative;
   min-width: 180px;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   margin: 0;
   width: 100%;
+  padding-right: 10px;
 }
 
 .menu-image {
@@ -122,6 +131,9 @@
   flex-direction: column;
   align-items: flex-start;
   margin-top: 0;
+  width: calc(100% - 150px);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .menu-details h3 {
@@ -131,7 +143,8 @@
   margin: 0 0 5px 0;
   text-align: left;
   width: 100%;
-  white-space: nowrap;
+  white-space: normal;
+  line-height: 1.4;
 }
 
 .menu-details .price {
@@ -148,6 +161,52 @@
   margin: 0;
   font-style: italic;
   text-align: left;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+.menu-categories {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  gap: 10px;
+}
+
+.category-btn {
+  padding: 8px 16px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  color: #4A2C2A;
+}
+
+.category-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.category-btn.active {
+  background-color: #6F4E37;
+  color: white;
+  border-color: #6F4E37;
+}
+
+.featured-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #6F4E37;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 1200px) {
@@ -173,7 +232,8 @@
     width: 100%;
     max-width: 1100px;
     margin: 0 auto;
-    grid-template-columns: 1fr 1fr 1fr;
+    transform: none;
+    left: auto;
   }
 }
 
@@ -200,6 +260,7 @@
 @media screen and (max-width: 576px) {
   .menu-grid {
     grid-template-columns: 1fr;
+    padding: 20px;
   }
   
   .menu-header h1 {
@@ -208,5 +269,16 @@
   
   .menu-description {
     font-size: 16px;
+  }
+  
+  .menu-categories {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .category-btn {
+    padding: 6px 12px;
+    font-size: 13px;
   }
 }

@@ -28,8 +28,11 @@ function Navbar() {
   // Check if current page is contact page
   const isContactPage = location.pathname === '/contact';
   
+  // Check if current page is a training details page (coming from learn more)
+  const isTrainingDetailsPage = location.pathname.startsWith('/trainings/');
+  
   // Set the search icon stroke color based on current page
-  const searchIconColor = isTrainingPage ? '#747474' : (isContactPage ? '#747474' : '#FFFFFF');
+  const searchIconColor = isTrainingPage || isTrainingDetailsPage ? '#747474' : (isContactPage ? '#747474' : '#FFFFFF');
   
   // Handle clicks outside of search area
   useEffect(() => {
@@ -147,9 +150,9 @@ function Navbar() {
     console.log('Trainings link clicked, navigating to /trainings');
   };
   
-  // Use this simple style approach
-  const contactLinkStyle = isTrainingPage || isContactPage ? { color: '#747474' } : {};
-  const trainingsLinkStyle = isContactPage ? { color: '#747474' } : {};
+  // Determine text color styles based on page
+  const contactLinkStyle = isTrainingPage || isContactPage || isTrainingDetailsPage ? { color: '#747474' } : {};
+  const trainingsLinkStyle = isContactPage || isTrainingDetailsPage ? { color: '#747474' } : {};
   
   // Handle home link click
   const handleHomeClick = (e) => {
@@ -158,7 +161,7 @@ function Navbar() {
   };
   
   return (
-    <nav className={`navbar ${isTrainingPage ? 'training-page' : ''}`}>
+    <nav className={`navbar ${isTrainingPage || isTrainingDetailsPage ? 'training-page' : ''}`}>
       <div className="navbar-container">
         <div className="nav-left">
           <a href="#outlets" className="nav-link" onClick={handleAboutClick}>
@@ -192,25 +195,25 @@ function Navbar() {
       </div>
       
       {showSearch && (
-        <div className={`navbar-search-overlay ${isTrainingPage ? 'training-search' : ''}`} ref={searchRef}>
-          <div className={`navbar-search-wrapper ${isTrainingPage ? 'training-search' : ''}`}>
+        <div className={`navbar-search-overlay ${isTrainingPage || isTrainingDetailsPage ? 'training-search' : ''}`} ref={searchRef}>
+          <div className={`navbar-search-wrapper ${isTrainingPage || isTrainingDetailsPage ? 'training-search' : ''}`}>
             <input
               id="navbar-search-input"
               type="text"
               placeholder="Search..."
               value={query}
               onChange={handleSearchChange}
-              className={isTrainingPage ? 'training-search-input' : ''}
+              className={isTrainingPage || isTrainingDetailsPage ? 'training-search-input' : ''}
             />
-            <button className={`navbar-search-close ${isTrainingPage ? 'training-close' : ''}`} onClick={toggleSearch}>
+            <button className={`navbar-search-close ${isTrainingPage || isTrainingDetailsPage ? 'training-close' : ''}`} onClick={toggleSearch}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18 6L6 18" stroke={isTrainingPage ? "#747474" : "#FFFFFF"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M6 6L18 18" stroke={isTrainingPage ? "#747474" : "#FFFFFF"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M18 6L6 18" stroke={isTrainingPage || isTrainingDetailsPage ? "#747474" : "#FFFFFF"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M6 6L18 18" stroke={isTrainingPage || isTrainingDetailsPage ? "#747474" : "#FFFFFF"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
             
             {results.length > 0 && (
-              <div className={`navbar-search-results ${isTrainingPage ? 'training-results' : ''}`}>
+              <div className={`navbar-search-results ${isTrainingPage || isTrainingDetailsPage ? 'training-results' : ''}`}>
                 {results.map((result, index) => (
                   <div 
                     key={index} 

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import './Contact.css';
+import { API_URL } from '../utils/constants';
 
 function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     subject: 'Website Contact Form',
     message: ''
   });
@@ -14,7 +16,16 @@ function Contact() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    
+    // Validate phone field to allow numbers and special characters for phone numbers
+    if (name === 'phone') {
+      // Allow international format with +, spaces, parentheses, and dashes
+      if (value === '' || /^[+]?[\s./0-9()-]*$/.test(value)) {
+        setFormData({ ...formData, [name]: value });
+      }
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -22,8 +33,17 @@ function Contact() {
     setLoading(true);
     setError(null);
     
+    // Ensure all required fields are filled
+    if (!formData.name || !formData.email || !formData.phone || !formData.message) {
+      setError('Please fill in all required fields');
+      setSubmitStatus('error');
+      setLoading(false);
+      return;
+    }
+    
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+      console.log('Submitting form data:', formData);
+      const response = await fetch(`${API_URL}/api/contacts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -37,7 +57,7 @@ function Contact() {
       }
       
       setSubmitStatus('success');
-      setFormData({ name: '', email: '', subject: 'Website Contact Form', message: '' });
+      setFormData({ name: '', email: '', phone: '', subject: 'Website Contact Form', message: '' });
       setTimeout(() => setSubmitStatus(null), 3000);
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.');
@@ -83,6 +103,22 @@ function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                />
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="phone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="Your phone number (e.g. +977 98XXXXXXXX)"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  pattern="^[+]?[\s./0-9()-]+$"
                 />
               </div>
             </div>

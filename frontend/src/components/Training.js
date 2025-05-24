@@ -163,43 +163,35 @@ function Training() {
         ) : (
           <div className="modern-training-grid">
             {trainings.map(training => (
-              <div key={training._id} className="modern-training-card" style={{ backgroundColor: '#F6EDE0' }}>
-                <div className="training-logo-container">
-                  <img 
-                    src={getPlaceholderImage(training.title, training.imageUrl)} 
-                    alt={`${training.title} logo`} 
-                    className="training-logo" 
-                  />
-                </div>
-                
-                <div className="modern-training-content">
-                  <h3 className="modern-training-title">{training.title}</h3>
-                  <p className="modern-training-duration">{training.duration}</p>
+              <Link 
+                key={training._id} 
+                to={`/trainings/${training._id}`}
+                className="card-link"
+              >
+                <div className="modern-training-card" style={{ backgroundColor: '#FFFFFF' }}>
+                  <div className="training-logo-container">
+                    <img 
+                      src={getPlaceholderImage(training.title, training.imageUrl)} 
+                      alt={`${training.title} logo`} 
+                      className="training-logo" 
+                    />
+                  </div>
                   
-                  <Link 
-                    to={`/trainings/${training._id}`}
-                    className="learn-more-button"
-                  >
-                    Learn More <span className="arrow">→</span>
-                  </Link>
+                  <div className="modern-training-content">
+                    <h3 className="modern-training-title">{training.title}</h3>
+                    <p className="modern-training-duration">{training.duration}</p>
+                    
+                    <div className="learn-more-button">
+                      Learn More <span className="arrow">→</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}
         
-        <div className="certification-section">
-          <div className="certification-content">
-            <h2>Professional Certification</h2>
-            <p>All our training courses come with industry-recognized certification. 
-            Our trainers have years of experience working with top companies in their respective fields.</p>
-            <p>Group discounts of 15% are available for teams of 3 or more people. 
-            Custom corporate training packages available upon request.</p>
-            <button className="contact-button">Contact Us</button>
-          </div>
-          <div className="certification-image" style={{ backgroundImage: `url(https://placehold.co/800x400?text=Certificate)` }}>
-          </div>
-        </div>
+
       </div>
     </section>
   );

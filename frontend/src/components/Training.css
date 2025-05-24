@@ -58,21 +58,36 @@ body:has(.training-section) .search-icon path {
   margin-bottom: 60px;
 }
 
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+  cursor: pointer;
+}
+
+.card-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
 .modern-training-card {
   display: flex;
   flex-direction: column;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   padding: 20px;
   height: 100%;
-  background-color: #F6EDE0;
+  background-color: #FFFFFF;
+  border: 1px solid #e0e0e0;
 }
 
 .modern-training-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  border-color: #d0d0d0;
 }
 
 .modern-training-card.expanded {
@@ -104,7 +119,7 @@ body:has(.training-section) .search-icon path {
 .modern-training-title {
   font-size: 18px;
   font-weight: 600;
-  color: #0B6B4A;
+  color: #4A2C2A;
   margin: 0 0 10px 0;
   line-height: 1.3;
 }
@@ -131,10 +146,10 @@ body:has(.training-section) .search-icon path {
   border: 1px solid #E0E0E0;
 }
 
-.learn-more-button:hover {
-  background-color: #8B4513;
+.card-link:hover .learn-more-button {
+  background-color: #6F4E37;
   color: white;
-  border-color: #8B4513;
+  border-color: #6F4E37;
 }
 
 .arrow {
@@ -143,7 +158,7 @@ body:has(.training-section) .search-icon path {
   transition: transform 0.2s ease;
 }
 
-.learn-more-button:hover .arrow {
+.card-link:hover .arrow {
   transform: translateX(3px);
 }
 
@@ -151,7 +166,7 @@ body:has(.training-section) .search-icon path {
 .certification-section {
   display: flex;
   align-items: stretch;
-  background-color: #F6EDE0;
+  background-color: #FFFFFF;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
@@ -241,10 +256,10 @@ body:has(.training-section) .search-icon path {
 .modern-training-level {
   font-size: 14px;
   font-weight: 500;
-  color: #0B6B4A;
+  color: #4A2C2A;
   margin: 0 0 10px 0;
   padding: 2px 8px;
-  background-color: rgba(11, 107, 74, 0.1);
+  background-color: rgba(74, 44, 42, 0.1);
   border-radius: 4px;
   display: inline-block;
 }
@@ -298,7 +313,7 @@ body:has(.training-section) .search-icon path {
 .training-detail-info h3 {
   margin-bottom: 15px;
   font-size: 20px;
-  color: #0B6B4A;
+  color: #4A2C2A;
 }
 
 .training-description-full {
@@ -324,7 +339,7 @@ body:has(.training-section) .search-icon path {
 .booking-form-container h3 {
   margin-bottom: 20px;
   font-size: 20px;
-  color: #0B6B4A;
+  color: #4A2C2A;
 }
 
 .booking-submit-btn {

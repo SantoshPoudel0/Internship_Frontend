@@ -116,6 +116,13 @@
   color: #aaa;
 }
 
+.form-text {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #747474;
+}
+
 .submit-button {
   background-color: #6A3D2A;
   color: white;

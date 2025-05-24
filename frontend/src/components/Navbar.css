@@ -81,6 +81,10 @@
   gap: 30px;
 }
 
+.nav-right {
+  margin-right: -40px; /* Move the icons to the right */
+}
+
 .navbar-logo {
   position: absolute;
   left: 50%;
@@ -119,6 +123,11 @@
 .nav-link[href="#outlets"],
 .nav-link[href="#menu"] {
   color: #747474;
+}
+
+/* Add specific styling for Services link to move it right */
+.nav-link[href="#services"] {
+  margin-left: 15px; /* Add margin to move Services slightly right */
 }
 
 .nav-link:hover {
@@ -193,7 +202,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: -250px;
+  right: -300px;
   display: flex;
   align-items: center;
   z-index: 1000;

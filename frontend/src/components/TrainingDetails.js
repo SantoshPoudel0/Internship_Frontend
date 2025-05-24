@@ -4,8 +4,10 @@ import axios from 'axios';
 import { API_URL } from '../utils/constants';
 import { Button, Form, Row, Col, Alert, Spinner, Container } from 'react-bootstrap';
 import './TrainingDetails.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-// Add this function to fix the no-undef error
+// Placeholder image function
 const getPlaceholderImage = (title, imageUrl) => {
   if (imageUrl && imageUrl !== 'default-training.jpg') {
     return `${API_URL}/uploads/${imageUrl}`;
@@ -19,6 +21,8 @@ const getPlaceholderImage = (title, imageUrl) => {
     return 'https://cdn.iconscout.com/icon/free/png-256/free-marketing-1855075-1574623.png';
   } else if (title.includes('Quality Assurance')) {
     return 'https://cdn.iconscout.com/icon/free/png-256/free-qa-1-283367.png';
+  } else if (title.toLowerCase().includes('coffee') || title.toLowerCase().includes('barista')) {
+    return 'https://cdn.iconscout.com/icon/free/png-256/free-coffee-beans-1851033-1569306.png';
   }
   return 'https://placehold.co/200x100?text=Training';
 };
@@ -54,15 +58,25 @@ function TrainingDetails() {
     fetchTraining();
   }, [id]);
 
-      // Function to get placeholder image based on training title  const getPlaceholderImage = (title, imageUrl) => {    if (imageUrl && imageUrl !== 'default-training.jpg') {      return `${API_URL}/uploads/${imageUrl}`;    }        if (title.includes('MERN')) {      return 'https://cdn.iconscout.com/icon/free/png-256/free-react-1-282599.png';    } else if (title.includes('Python')) {      return 'https://cdn.iconscout.com/icon/free/png-256/free-python-3521655-2945099.png';    } else if (title.includes('Digital Marketing')) {      return 'https://cdn.iconscout.com/icon/free/png-256/free-marketing-1855075-1574623.png';    } else if (title.includes('Quality Assurance')) {      return 'https://cdn.iconscout.com/icon/free/png-256/free-qa-1-283367.png';    }    return 'https://placehold.co/200x100?text=Training';  };    // Function to get instructor image  const getInstructorImage = (instructor) => {    if (instructor && instructor.imageUrl && instructor.imageUrl !== 'default-instructor.jpg') {      return `${API_URL}/uploads/${instructor.imageUrl}`;    }    return 'https://placehold.co/100x100?text=Instructor';  };
-
   // Handle booking form input changes
   const handleFormChange = (e) => {
     const { name, value } = e.target;
-    setBookingForm(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    
+    // Validate phone field to allow numbers and special characters for phone numbers
+    if (name === 'phone') {
+      // Allow international format with +, spaces, parentheses, and dashes
+      if (value === '' || /^[+]?[\s./0-9()-]*$/.test(value)) {
+        setBookingForm(prev => ({
+          ...prev,
+          [name]: value
+        }));
+      }
+    } else {
+      setBookingForm(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
   };
   
   // Handle booking form submission
@@ -79,7 +93,17 @@ function TrainingDetails() {
         trainingTitle: training.title
       });
       
-      setFormSuccess(true);
+      // Show success toast notification
+      toast.success('🎉 Booking Submitted Successfully! We will contact you shortly.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      
       setBookingForm({
         name: '',
         email: '',
@@ -87,7 +111,15 @@ function TrainingDetails() {
         message: ''
       });
     } catch (err) {
-      setFormError('Failed to submit booking. Please try again.');
+      toast.error('Failed to submit booking. Please try again.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       console.error('Booking submission error:', err);
     } finally {
       setFormSubmitting(false);
@@ -118,200 +150,240 @@ function TrainingDetails() {
   }
 
   return (
-    <div className="training-details-page">
-      {/* Hero Background */}
-      <div className="training-hero"></div>
-      
-      <Container>
-        <div className="back-link">
-          <Link to="/trainings" className="back-btn-accent">
-            Back
-          </Link>
-        </div>
+    <div className="new-training-details-page">
+      <div className="new-training-back-btn">
+        <Link to="/trainings" className="new-back-link">
+          Back
+        </Link>
+      </div>
 
-        {training && (
-          <div className="training-main-container">
-            <div className="training-header-section">
-              <div className="training-title-area">
-                <h1 className="training-heading">{training.title}</h1>
-                <div className="training-meta">
-                  <span className="duration-badge">Duration: {training.duration}</span>
-                  <span className="price-tag">Price: Rs. {training.price}
-                    {training.discount > 0 && <span className="discount"> (Rs. {training.discount} discount)</span>}
-                  </span>
-                </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+
+      {training && (
+        <>
+          <div className="new-training-container">
+            <h1 className="new-training-title">{training.title}</h1>
+            
+            <div className="new-training-content">
+              <div className="new-training-description">
+                <p>{training.description}</p>
               </div>
-              <div className="training-image-area">
+              
+              <div className="new-training-image-container">
                 <img 
                   src={getPlaceholderImage(training.title, training.imageUrl)} 
                   alt={training.title}
-                  className="training-featured-image"
+                  className="new-training-image"
                 />
               </div>
             </div>
+            
+            <table className="new-training-details-table">
+              <tbody>
+                <tr>
+                  <th>Training Level</th>
+                  <td>{training.level || 'All Levels'}</td>
+                  <th>Format</th>
+                  <td>{training.format || 'Physical/Online Class'}</td>
+                </tr>
+                <tr>
+                  <th>Duration</th>
+                  <td>{training.duration}</td>
+                  <th>Price</th>
+                  <td>
+                    {training.discount > 0 ? (
+                      <>
+                        <span style={{ textDecoration: 'line-through', marginRight: '10px' }}>
+                          Rs. {training.price}
+                        </span>
+                        <span style={{ color: '#4A2C2A', fontWeight: 'bold' }}>
+                          Rs. {training.price - training.discount}
+                        </span>
+                      </>
+                    ) : (
+                      `Rs. ${training.price}`
+                    )}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Career Prospect</th>
+                  <td colSpan="3">{training.careerProspect || (training.title.toLowerCase().includes('barista') || training.title.toLowerCase().includes('coffee') ? 'Barista/Coffee Professional' : 'Industry Professional')}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-            <div className="training-content-section">
-              <div className="row">
-                <div className="col-lg-8">
-                  <div className="content-box description-box">
-                    <h2>Training Description</h2>
-                    <div className="description-content">
-                      <p>{training.description}</p>
-                    </div>
-                  </div>
-
-                  <div className="content-box training-highlights">
-                    <h2>What You'll Learn</h2>
-                    <ul className="highlights-list">
-                      {training.learningTopics && training.learningTopics.length > 0 ? (
-                        training.learningTopics.map((topic, index) => (
-                          <li key={index}>{topic}</li>
-                        ))
-                      ) : (
-                        <>
-                          <li>Real-world projects to build your portfolio</li>
-                          <li>Industry-relevant skills taught by experts</li>
-                          <li>Personalized mentoring and doubt-clearing sessions</li>
-                          <li>Flexible timing options available</li>
-                          <li>Job placement assistance after completion</li>
-                          <li>Certification upon successful completion</li>
-                        </>
-                      )}
-                    </ul>
-                  </div>
-                  
-                  <div className="content-box instructor-section">
-                    <h2>Meet Your Instructor</h2>
-                    <div className="instructor-profile">
-                      <div className="instructor-avatar">
-                        <img 
-                          src={training.instructor?.imageUrl && training.instructor.imageUrl !== 'default-instructor.jpg'
-                              ? `${API_URL}/uploads/${training.instructor.imageUrl}`
-                              : "https://placehold.co/100x100?text=Instructor"} 
-                          alt={training.instructor?.name || "Instructor"} 
-                        />
-                      </div>
-                      <div className="instructor-info">
-                        {training.instructor && training.instructor.name ? (
+          {/* Original content sections */}
+          <Container className="mt-5">
+            <div className="row">
+              <div className="col-lg-8">
+                <div className="content-box training-highlights">
+                  <h2>What You'll Learn</h2>
+                  <ul className="highlights-list">
+                    {training.learningTopics && training.learningTopics.length > 0 ? (
+                      training.learningTopics.map((topic, index) => (
+                        <li key={index}>{topic}</li>
+                      ))
+                    ) : (
+                      <>
+                        {training.title.toLowerCase().includes('barista') || training.title.toLowerCase().includes('coffee') ? (
                           <>
-                            <h3>{training.instructor.name}</h3>
-                            <p className="instructor-title">{training.instructor.title || 'Instructor'}</p>
-                            <p className="instructor-bio">{training.instructor.bio || 'An experienced trainer passionate about helping students achieve their goals.'}</p>
+                            <li>Coffee bean selection and quality assessment</li>
+                            <li>Proper grinding techniques and equipment maintenance</li>
+                            <li>Advanced extraction methods and brewing variables</li>
+                            <li>Milk steaming and latte art techniques</li>
+                            <li>Coffee flavor profiles and sensory evaluation</li>
+                            <li>Barista competition preparation and skills</li>
                           </>
                         ) : (
                           <>
-                            <h3>{training.title.includes('MERN') ? 'John Doe' : training.title.includes('Python') ? 'Jane Smith' : 'Alex Johnson'}</h3>
-                            <p className="instructor-title">Senior {training.title.includes('MERN') ? 'Web Developer' : training.title.includes('Python') ? 'Python Developer' : training.title.includes('Digital Marketing') ? 'Marketing Manager' : 'QA Engineer'}</p>
-                            <p className="instructor-bio">An experienced trainer with over 8 years of industry experience in leading companies. Passionate about mentoring new talent and helping students achieve their career goals.</p>
+                            <li>Real-world projects to build your portfolio</li>
+                            <li>Industry-relevant skills taught by experts</li>
+                            <li>Personalized mentoring and doubt-clearing sessions</li>
+                            <li>Flexible timing options available</li>
+                            <li>Job placement assistance after completion</li>
+                            <li>Certification upon successful completion</li>
                           </>
                         )}
-                      </div>
-                    </div>
-                  </div>
+                      </>
+                    )}
+                  </ul>
                 </div>
                 
-                <div className="col-lg-4">
-                  <div className="content-box booking-box">
-                    <h2>Book This Training</h2>
-                    {formSuccess ? (
-                      <Alert variant="success">
-                        <Alert.Heading>Booking Submitted!</Alert.Heading>
-                        <p>
-                          Thank you for your interest in the {training.title} training. 
-                          We've received your booking request and will get back to you shortly.
-                        </p>
-                      </Alert>
-                    ) : (
-                      <Form onSubmit={handleSubmitBooking}>
-                        {formError && <Alert variant="danger">{formError}</Alert>}
-                        
-                        <div className="form-group">
-                          <Form.Label>Your Name</Form.Label>
-                          <Form.Control
-                            type="text"
-                            name="name"
-                            value={bookingForm.name}
-                            onChange={handleFormChange}
-                            required
-                            placeholder="Enter your name"
-                          />
-                        </div>
-                        
-                        <div className="form-group">
-                          <Form.Label>Email Address</Form.Label>
-                          <Form.Control
-                            type="email"
-                            name="email"
-                            value={bookingForm.email}
-                            onChange={handleFormChange}
-                            required
-                            placeholder="Enter your email"
-                          />
-                        </div>
-                        
-                        <div className="form-group">
-                          <Form.Label>Phone Number</Form.Label>
-                          <Form.Control
-                            type="text"
-                            name="phone"
-                            value={bookingForm.phone}
-                            onChange={handleFormChange}
-                            required
-                            placeholder="Enter your phone number"
-                          />
-                        </div>
-                        
-                        <div className="form-group">
-                          <Form.Label>Message (Optional)</Form.Label>
-                          <Form.Control
-                            as="textarea"
-                            rows={3}
-                            name="message"
-                            value={bookingForm.message}
-                            onChange={handleFormChange}
-                            placeholder="Any specific questions or requirements?"
-                          />
-                        </div>
-                        
-                        <Button 
-                          type="submit" 
-                          className="booking-submit-btn" 
-                          disabled={formSubmitting}
-                        >
-                          {formSubmitting ? (
-                            <>
-                              <Spinner
-                                as="span"
-                                animation="border"
-                                size="sm"
-                                role="status"
-                                aria-hidden="true"
-                              />
-                              <span className="ms-2">Processing...</span>
-                            </>
-                          ) : (
-                            'Submit Booking Request'
-                          )}
-                        </Button>
-                      </Form>
-                    )}
-                  </div>
-
-                  <div className="content-box contact-box">
-                    <h3>Need More Information?</h3>
-                    <p>Contact us directly for any questions about this training program.</p>
-                    <div className="contact-info">
-                      <p><strong>Phone:</strong> +977-1-4123456</p>
-                      <p><strong>Email:</strong> training@himalayanjava.com</p>
-                      <p><strong>Location:</strong> Thamel, Kathmandu, Nepal</p>
+                <div className="content-box instructor-section">
+                  <h2>Meet Your Instructor</h2>
+                  <div className="instructor-profile">
+                    <div className="instructor-avatar">
+                      <img 
+                        src={training.instructor?.imageUrl && training.instructor.imageUrl !== 'default-instructor.jpg'
+                            ? `${API_URL}/uploads/${training.instructor.imageUrl}`
+                            : "https://placehold.co/100x100?text=Instructor"} 
+                        alt={training.instructor?.name || "Instructor"} 
+                      />
+                    </div>
+                    <div className="instructor-info">
+                      {training.instructor && training.instructor.name ? (
+                        <>
+                          <h3>{training.instructor.name}</h3>
+                          <p className="instructor-title">{training.instructor.title || 'Coffee Training Instructor'}</p>
+                          <p className="instructor-bio">{training.instructor.bio || 'An experienced trainer passionate about helping students achieve their coffee skills and goals.'}</p>
+                        </>
+                      ) : (
+                        <>
+                          <h3>{training.title.toLowerCase().includes('barista') ? 'Coffee Master' : 'Expert Trainer'}</h3>
+                          <p className="instructor-title">Professional {training.title.toLowerCase().includes('barista') ? 'Barista Trainer' : 'Coffee Training Expert'}</p>
+                          <p className="instructor-bio">An experienced trainer with extensive experience in coffee industry. Passionate about mentoring new talent and helping students achieve their coffee career goals.</p>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
+              
+              <div className="col-lg-4">
+                <div className="content-box booking-box">
+                  <h2>Book This Training</h2>
+                  <Form onSubmit={handleSubmitBooking}>
+                    {formError && <Alert variant="danger">{formError}</Alert>}
+                    
+                    <div className="form-group">
+                      <Form.Label>Your Name</Form.Label>
+                      <Form.Control
+                        type="text"
+                        name="name"
+                        value={bookingForm.name}
+                        onChange={handleFormChange}
+                        required
+                        placeholder="Enter your name"
+                      />
+                    </div>
+                    
+                    <div className="form-group">
+                      <Form.Label>Email Address</Form.Label>
+                      <Form.Control
+                        type="email"
+                        name="email"
+                        value={bookingForm.email}
+                        onChange={handleFormChange}
+                        required
+                        placeholder="Enter your email"
+                      />
+                    </div>
+                    
+                    <div className="form-group">
+                      <Form.Label>Phone Number</Form.Label>
+                      <Form.Control
+                        type="tel"
+                        name="phone"
+                        value={bookingForm.phone}
+                        onChange={handleFormChange}
+                        required
+                        placeholder="Your phone number (e.g. +977 98XXXXXXXX)"
+                        pattern="^[+]?[\s./0-9()-]+$"
+                      />
+                    </div>
+                    
+                    <div className="form-group">
+                      <Form.Label>Message (Optional)</Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={3}
+                        name="message"
+                        value={bookingForm.message}
+                        onChange={handleFormChange}
+                        placeholder="Any specific questions or requirements?"
+                      />
+                    </div>
+                    
+                    <Button 
+                      type="submit" 
+                      className="booking-submit-btn" 
+                      disabled={formSubmitting}
+                      style={{ backgroundColor: '#4A2C2A', border: 'none' }}
+                    >
+                      {formSubmitting ? (
+                        <>
+                          <Spinner
+                            as="span"
+                            animation="border"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                          <span className="ms-2">Processing...</span>
+                        </>
+                      ) : (
+                        'Submit Booking Request'
+                      )}
+                    </Button>
+                  </Form>
+                </div>
+
+                <div className="content-box contact-box">
+                  <h3>Need More Information?</h3>
+                  <p>Contact us directly for any questions about this coffee training program.</p>
+                  <div className="contact-info">
+                    <p><strong>Phone:</strong> +977-1-4123456</p>
+                    <p><strong>Email:</strong> training@coffeetraining.com</p>
+                    <p><strong>Location:</strong> Thamel, Kathmandu, Nepal</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        )}
-      </Container>
+          </Container>
+        </>
+      )}
     </div>
   );
 }

@@ -767,30 +767,30 @@
 
 .new-training-description {
   flex: 1;
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 17px;
+  line-height: 1.7;
   color: #333;
   padding-left: 30px;
   margin-top: 10px;
 }
 
 .new-training-image-container {
-  width: 250px;
-  height: 250px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: white;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 30px;
+  width: 400px;
+  height: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  background-color: #f8f9fa;
+  border: 5px solid #fff;
+  margin-left: 40px;
+  flex-shrink: 0;
 }
 
 .new-training-image {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  padding: 15px;
 }
 
 .new-training-details-table {
@@ -818,6 +818,13 @@
   width: 30%;
 }
 
+@media (max-width: 992px) {
+  .new-training-image-container {
+    width: 350px;
+    height: 350px;
+  }
+}
+
 @media (max-width: 768px) {
   .new-training-content {
     flex-direction: column;
@@ -825,13 +832,9 @@
   
   .new-training-image-container {
     width: 100%;
-    max-width: 250px;
+    max-width: 350px;
+    height: 350px;
     margin: 20px auto;
-  }
-  
-  .new-training-details-table th,
-  .new-training-details-table td {
-    padding: 10px;
   }
 }
 

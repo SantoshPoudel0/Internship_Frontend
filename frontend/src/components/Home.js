@@ -34,6 +34,13 @@ function Home() {
     });
   };
 
+  // Hardcoded stats to ensure they always display correctly
+  const stats = [
+    { number: "7", text: "Years Experience" },
+    { number: "25k+", text: "Coffee Consumed" },
+    { number: "35k+", text: "Customers" }
+  ];
+
   return (
     <div className="home">
       <section className="landing-section">
@@ -73,18 +80,12 @@ function Home() {
               style={{ visibility: imageLoaded ? 'visible' : 'hidden' }} 
             />
             <div className="stats-container">
-              <div className="stat-item">
-                <span className="stat-number">7</span>
-                <span className="stat-text">Years Experience</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">25k+</span>
-                <span className="stat-text">Coffee Consumed</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">35k+</span>
-                <span className="stat-text">Customers</span>
-              </div>
+              {stats.map((stat, index) => (
+                <div className="stat-item" key={index}>
+                  <span className="stat-number">{stat.number}</span>
+                  <span className="stat-text">{stat.text}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
